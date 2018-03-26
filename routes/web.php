@@ -18,6 +18,7 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+//Route::post('/home', ['uses' => 'HomeController@home', 'as' => 'home.custom']);
 
 Route::post('/login/custom', ['uses'=>'LoginController@login', 
     'as' => 'login.custom'
@@ -31,3 +32,5 @@ Route::group(['middleware' => 'auth'], function(){
         return view('admin_home');
     })->name('admin_home');
 });
+
+Route::resource('admin-film','FilmController');

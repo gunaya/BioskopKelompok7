@@ -541,20 +541,11 @@ class Arr
      * Shuffle the given array and return the result.
      *
      * @param  array  $array
-     * @param  int|null  $seed
      * @return array
      */
-    public static function shuffle($array, $seed = null)
+    public static function shuffle($array)
     {
-        if (is_null($seed)) {
-            shuffle($array);
-        } else {
-            srand($seed);
-
-            usort($array, function () {
-                return rand(-1, 1);
-            });
-        }
+        shuffle($array);
 
         return $array;
     }

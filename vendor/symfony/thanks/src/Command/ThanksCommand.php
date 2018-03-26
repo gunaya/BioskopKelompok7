@@ -168,8 +168,7 @@ class ThanksCommand extends BaseCommand
             }
         }
 
-        $failures = [];
-        $repos = $this->callGitHub($rfs, sprintf("query{\n%s}", $graphql), $failures);
+        $repos = $this->callGitHub($rfs, sprintf("query{\n%s}", $graphql));
 
         $template = '%1$s: addStar(input:{clientMutationId:"%s",starrableId:"%s"}){clientMutationId}'."\n";
         $graphql = '';
@@ -195,22 +194,12 @@ class ThanksCommand extends BaseCommand
             }
         }
 
-        if ($failures) {
-            $output->writeln('');
-            $output->writeln('Some repositories could not be starred, please run <info>composer update</info> and try again:');
-
-            foreach ($failures as $alias => $message) {
-                $output->writeln(sprintf(' * %s - %s', $aliases[$alias][1], $message));
-            }
-        }
-
         $output->writeln(sprintf("\nThanks to you! %s", $this->love));
-        $output->writeln("Please consider contributing back in any way if you can!");
 
         return 0;
     }
 
-    private function callGitHub(RemoteFilesystem $rfs, $graphql, &$failures = [])
+    private function callGitHub(RemoteFilesystem $rfs, $graphql)
     {
         if ($eventDispatcher = $this->getComposer()->getEventDispatcher()) {
             $preFileDownloadEvent = new PreFileDownloadEvent(PluginEvents::PRE_FILE_DOWNLOAD, $rfs, 'https://api.github.com/graphql');
@@ -230,16 +219,7 @@ class ThanksCommand extends BaseCommand
         $result = json_decode($result, true);
 
         if (isset($result['errors'][0]['message'])) {
-            if (!$result['data']) {
-                throw new TransportException($result['errors'][0]['message']);
-            }
-
-            foreach ($result['errors'] as $error) {
-                foreach ($error['path'] as $path) {
-                    $failures += [$path => $error['message']];
-                    unset($result['data'][$path]);
-                }
-            }
+            throw new TransportException($result['errors'][0]['message']);
         }
 
         return $result['data'];
