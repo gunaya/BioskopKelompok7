@@ -34,3 +34,5 @@ Route::group(['middleware' => 'auth'], function(){
 });
 
 Route::resource('admin-film','FilmController');
+
+Route::get('/user_home','FilmController@show_film')->name('user_home');

@@ -12,16 +12,17 @@
                     </div>            
                         <div class="panel-title"><h5>Now Playing in DENPASAR</h5></div>
                             <div class="movie_grid">  
-                                <div class="div_space">                        
+                                <div class="div_space">
+                                    @foreach($film as $listFilm)                 
                                     <div class="col-md-3 content-grid" >                                       
                                         <div class="panel panel-default panel-card">                                  
                                             <a href=>     
                                                  <div class="panel-heading">
-                                                    <img id="WINC" src="https://web3.21cineplex.com/movie-images/16WINR.jpg" width="175" height="185"/>                                                                                      
+                                                    <img id="WINC" src="{{asset('upload/images/'.$listFilm->image) }}" width="175" height="185"/>                                                                                      
                                                 </div>                                          
                                             </a>                                            
                                             <div class="panel-body">                                                
-                                                <span>WINCHESTER</span>                                        
+                                                <span>{{$listFilm->nama_film}}</span>                                        
                                             </div>  
                                                 <br/>   
                                                 <br/>                                             
@@ -33,52 +34,9 @@
                                             </div> 
                                         </div> 
                                     </div> 
-
-                                    <div class="col-md-3 content-grid" >                                       
-                                        <div class="panel panel-default panel-card1">                                  
-                                            <a href=>     
-                                                 <div class="panel-heading">
-                                                    <img id="YOWI" src="https://web3.21cineplex.com/movie-images/08YBEN.jpg" width="175" height="185"/>                                                                                      
-                                                </div>                                          
-                                            </a>                                            
-                                            <div class="panel-body1">                                                
-                                                <span>YOWISBEN</span>                                        
-                                            </div>  
-                                                <br/>   
-                                                <br/>                                             
-                                                <div class="panel-thumbnails center-block">                                                
-                                                    <div class="btn-group-sm">                                                
-                                                        <a class="btn btn-success" href=> BUY TICKET</a>
-                                                    </div>    
-                                                </div>                                               
-                                            </div> 
-                                        </div> 
-                                    </div> 
+                                    @endforeach
                                 </div> 
-                            </div> 
-
-                            <div class="col-md-3 content-grid" >                                       
-                                        <div class="panel panel-default panel-card2">                                  
-                                            <a href=>     
-                                                 <div class="panel-heading">
-                                                    <img id="PAC2" src="https://web3.21cineplex.com/movie-images/18PRUG.jpg" width="175" height="185"/>                                                                                      
-                                                </div>                                          
-                                            </a>                                            
-                                            <div class="panel-body2">                                                
-                                                <span>PACIFIC RIM UPRISING</span>                                        
-                                            </div>  
-                                                <br/>   
-                                                <br/>                                             
-                                                <div class="panel-thumbnails center-block">                                                
-                                                    <div class="btn-group-sm">                                                
-                                                        <a class="btn btn-success" href=> BUY TICKET</a>
-                                                    </div>    
-                                                </div>                                               
-                                            </div> 
-                                        </div> 
-                                    </div> 
-                                    
-
+                            </div>
                         </div>                                        
                     </div>                                       
                 </div>

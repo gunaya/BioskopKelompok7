@@ -27,6 +27,10 @@
 	<input type="text" class="form-control"  name="negara" id="negara">
 </div>
 <div class="form-group">
+	<label for="image">Image</label>
+	<input type="file" class="form-control" name="image" id="image">
+</div>
+<div class="form-group">
 	<label for="id_genre">Genre</label>
 	<select class="form-control" name="id_genre_film" id="id_genre_film">
 	  	@foreach($genre_array as $item)

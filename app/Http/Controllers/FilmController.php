@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Input;
 use \App\Film;
+use \File;
+use \Storage;
 use \App\tb_genre_film;
 
 class FilmController extends Controller
@@ -37,7 +41,24 @@ class FilmController extends Controller
      */
     public function store(Request $request)
     {
-        Film::create($request->all());
+        $image = $request->file('image');
+        $filename = $image->getClientOriginalName();
+        $image->move('upload\images', $filename, file_get_contents($request->file('image')->getRealPath()));
+
+        $film = new Film;
+
+        $film -> nama_film = $request->get('nama_film');
+        $film->tahun_produksi = $request->get('tahun_produksi');
+        $film->direksi = $request->get('direksi');
+        $film->pemain = $request->get('pemain');
+        $film->sinopsis = $request->get('sinopsis');
+        $film->bahasa = $request->get('bahasa');
+        $film->id_genre_film = $request->get('id_genre_film');
+        $film->id_kategori = $request->get('id_kategori');
+        $film->image = $filename;
+        $film->save();
+//['nama_film','tahun_produksi','direksi','pemain','sinopsis','bahasa','negara','id_genre_film','id_kategori'];
+        //Film::create($request->all());
         //dd($request->all());
         return back();
     }
@@ -90,5 +111,11 @@ class FilmController extends Controller
         $film_id = Film::FindOrFail($request->id_film);
         $film_id->delete();
         return back();
+    }
+
+    public function show_film()
+    {
+        $film = Film::all();
+        return view('/user_home',compact('film'));
     }
 }

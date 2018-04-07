@@ -88,7 +88,7 @@
 	        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 	        <h4 class="modal-title" id="filmModal">New Movie</h4>
 	      </div>
-	      <form action="{{route('admin-film.store')}}" method="post">
+	      <form role="form" action="{{route('admin-film.store')}}" method="post" enctype="multipart/form-data" >
 	      	{{csrf_field()}}
 	      	<div class="modal-body">
 	        	@include('admin-film.form')
