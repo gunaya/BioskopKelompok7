@@ -30,3 +30,10 @@ $('#deleteModal').on('show.bs.modal', function (event) {
 	var modal = $(this)
 	modal.find('.modal-body #id_film').val(id_film)
 })
+
+$(function () {
+    $('#datetimepicker1').datetimepicker({
+		viewMode: 'years',
+		format: 'YYYY'
+    });
+});

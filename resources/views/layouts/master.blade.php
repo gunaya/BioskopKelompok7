@@ -7,7 +7,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>AdminLTE 2 | Starter</title>
+  <title>Cinemine</title>
   <!-- CSRF Token -->
   <meta name="csrf-token" content="{{ csrf_token() }}">
   <!-- Tell the browser to be responsive to screen width -->
@@ -17,6 +17,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <link rel="stylesheet" href="{{asset('admin-lte/bower_components/font-awesome/css/font-awesome.min.css')}}">
   <!-- Ionicons -->
   <link rel="stylesheet" href="{{asset('admin-lte/bower_components/Ionicons/css/ionicons.min.css')}}">
+  <!-- Tempus -->
+  <link rel="stylesheet" href="{{asset('css/bootstrap-datetimepicker.min.css')}}" />
+
   <!-- Theme style -->
   <link rel="stylesheet" href="{{asset('admin-lte/dist/css/AdminLTE.min.css')}}">
   <!-- AdminLTE Skins. We have chosen the skin-blue for this starter
@@ -64,9 +67,9 @@ desired effect
     <!-- Logo -->
     <a href="{{url('admin_home')}}" class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
-      <span class="logo-mini"><b>BC</b></span>
+      <span class="logo-mini"><b>CM</b></span>
       <!-- logo for regular state and mobile devices -->
-      <span class="logo-lg"><b>B</b>ioskopnya<b>C</b>indy</span>
+      <span class="logo-lg"><b>C</b>ine<b>M</b>ine</span>
     </a>
 
     <!-- Header Navbar -->
@@ -224,8 +227,12 @@ desired effect
 <script src="{{asset('admin-lte/bower_components/bootstrap/dist/js/bootstrap.min.js')}}"></script>
 <!-- AdminLTE App -->
 <script src="{{asset('admin-lte/dist/js/adminlte.min.js')}}"></script>
+<!-- Datepicker -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.21.0/moment.min.js"></script>
 <!-- Edit Film -->
-<script src="{{ asset('js/editFilm.js') }}"></script>
+<script src="{{asset('js/editFilm.js')}}"></script>
+<script src="{{asset('js/bootstrap-datetimepicker.min.js')}}"></script>
+
 
 <!-- Optionally, you can add Slimscroll and FastClick plugins.
      Both of these plugins are recommended to enhance the
