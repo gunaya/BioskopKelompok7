@@ -245,7 +245,7 @@ header.masthead .intro-text .intro-heading {
   -moz-transition: all ease 0.5s;
   transition: all ease 0.5s;
   opacity: 0;
-  background: rgba(254, 209, 54, 0.9);
+ 
 }
 
 #portfolio .portfolio-item .portfolio-link .portfolio-hover:hover {
@@ -691,4 +691,8 @@ ul.social-buttons li a {
 
 ul.social-buttons li a:active, ul.social-buttons li a:focus, ul.social-buttons li a:hover {
   background-color: #fed136;
+}
+
+.btn-group-sm{
+  margin-top: 20px;
 }

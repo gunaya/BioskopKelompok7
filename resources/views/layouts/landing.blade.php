@@ -78,12 +78,11 @@
                         <a class="dropdown-item" href="{{ route('logout') }}"
                            onclick="event.preventDefault();
                                          document.getElementById('logout-form').submit();">
-                            {{ __('Logout') }}
-                        </a>
-
+                            {{ __('Logouta') }}
                         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                             @csrf
                         </form>
+                        
                     </div>
                 </li>
             @endguest
@@ -99,7 +98,7 @@
           <div class="intro-lead-in">Welcome!</div>
           <div class="intro-heading text-uppercase">It's Nice To Meet You</div>
           @guest
-            <a class="btn btn-primary btn-xl text-uppercase js-scroll-trigger" href="{{ route('register') }}">Get Started</a>
+            <a class="btn btn-primary btn-xl text-uppercase js-scroll-trigger" href="{{ route('register') }}">Register</a>
           @else
             <a class="btn btn-primary btn-xl text-uppercase js-scroll-trigger" href="{{ route('user_home') }}">Browse Movies</a>
           @endguest
