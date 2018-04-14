@@ -168,7 +168,6 @@ desired effect
             <li><a href="#">Genre</a></li>
           </ul>
         </li>
-        <li><a href="#"><i class="fa fa-link"></i> <span>Member</span></a></li>
         <li class="treeview">
           <a href="#"><i class="fa fa-link"></i> <span>Lorem</span>
             <span class="pull-right-container">

@@ -53,9 +53,9 @@ class FilmController extends Controller
         $film->pemain = $request->get('pemain');
         $film->sinopsis = $request->get('sinopsis');
         $film->bahasa = $request->get('bahasa');
+        $film->image = $filename;
         $film->id_genre_film = $request->get('id_genre_film');
         $film->id_kategori = $request->get('id_kategori');
-        $film->image = $filename;
         $film->save();
 //['nama_film','tahun_produksi','direksi','pemain','sinopsis','bahasa','negara','id_genre_film','id_kategori'];
         //Film::create($request->all());

@@ -8,5 +8,5 @@ class Film extends Model
 {
 	protected $primaryKey = 'id_film';
 	protected $table = 'tb_film';
-    protected $fillable = ['nama_film','tahun_produksi','direksi','pemain','sinopsis','bahasa','negara','id_genre_film','id_kategori'];
+    protected $fillable = ['nama_film','tahun_produksi','direksi','pemain','sinopsis','bahasa','negara','image','id_genre_film','id_kategori'];
 }

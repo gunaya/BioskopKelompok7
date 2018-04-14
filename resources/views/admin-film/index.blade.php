@@ -27,6 +27,7 @@
 					      <th>Direksi</th>
 					      <th>Pemain</th>
 					      <th>Sinopsis</th>
+					      <th>Image</th>
 					      <th>Modify</th>
 					    </tr>
 				  	</thead>
@@ -39,6 +40,7 @@
 							    <td>{{$list->direksi}}</td>
 							    <td>{{$list->pemain}}</td>
 							    <td>{{str_limit($list->sinopsis, 30)}}</td>
+							    <td>{{$list->image}}</td>
 							    <td>
 							      	<button class="btn btn-info" data-toggle="modal"
 							      			data-fid="{{$list->id_film}}" 
@@ -47,6 +49,7 @@
 							      			data-fdireksi="{{$list->direksi}}"
 							      			data-fpemain="{{$list->pemain}}"
 							      			data-fsinopsis="{{$list->sinopsis}}"
+							      			data-fimage="{{$list->image}}"
 							      			data-fgenre="{{$list->id_genre_film}}"
 							      			data-fkategori="{{$list->id_kategori}}"
 							      			data-target="#editModal">

@@ -23,14 +23,14 @@
                 
                 </div>
               </div>
-              <img class="img-fluid" src="{{asset('upload/images/'.$listFilm->image) }}" alt="">
+              <img class="" src="{{asset('upload/images/'.$listFilm->image) }}" alt="">
             </a>
             <div class="portfolio-caption">
             <span>{{$listFilm->nama_film}}</span> 
               <div class="panel-thumbnails center-block">                                                
-                                                    <div class="btn-group-sm">                                                
-                                                        <a class="btn btn-success" href="buytiket.html"> BUY TICKET</a>
-                                                    </div>    
+                <div class="btn-group-sm">                                                
+                    <a class="btn btn-success" href="#"> BUY TICKET</a>
+                </div>    
             </div>
           </div>
           @endforeach
