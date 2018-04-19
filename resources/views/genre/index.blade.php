@@ -4,7 +4,7 @@
 	<div class="">
 		<div class="box">
 			<div class="box-header">
-			  <h3 class="box-title">All Movies</h3>
+			  <h3 class="box-title">All Genres</h3>
 
 			  <div class="box-tools">
 			    <div class="input-group input-group-sm" style="width: 150px;">
@@ -22,41 +22,24 @@
 				  	<thead>
 					    <tr>
 					      <th>ID</th>
-					      <th>Judul</th>
-					      <th>Tahun</th>
-					      <th>Direksi</th>
-					      <th>Pemain</th>
-					      <th>Sinopsis</th>
-					      <th>Image</th>
-					      <th>Modify</th>
+					      <th>Genre</th>
+					      <th> </th>
 					    </tr>
 				  	</thead>
 				    <tbody>
-				    	@foreach($listFilm as $list)
+				    	@foreach($genre as $list)
 						    <tr>
-						    	<td>{{$list->id_film}}</td>
-							    <td>{{$list->nama_film}}</td>
-							    <td>{{$list->tahun_produksi}}</td>
-							    <td>{{$list->direksi}}</td>
-							    <td>{{$list->pemain}}</td>
-							    <td>{{str_limit($list->sinopsis, 30)}}</td>
-							    <td>{{str_limit($list->image, 10)}}</td>
+						    	<td>{{$list->id_genre_film}}</td>
+							    <td>{{$list->genre_film}}</td>
 							    <td>
 							      	<button class="btn btn-info" data-toggle="modal"
-							      			data-fid="{{$list->id_film}}" 
-							      			data-fnama="{{$list->nama_film}}"
-							      			data-ftahun="{{$list->tahun_produksi}}"
-							      			data-fdireksi="{{$list->direksi}}"
-							      			data-fpemain="{{$list->pemain}}"
-							      			data-fsinopsis="{{$list->sinopsis}}"
-							      			data-fimage="{{$list->image}}"
-							      			data-fgenre="{{$list->id_genre_film}}"
-							      			data-fkategori="{{$list->id_kategori}}"
-							      			data-target="#editModal">
+							      			data-fid="{{$list->id_genre_film}}" 
+							      			data-fgenre="{{$list->genre_film}}"
+							      			data-target="#editgenre">
 							      		Edit
 							      	</button>
 							      			/ 
-							      	<button class="btn btn-danger" data-fid="{{$list->id_film}}" data-toggle="modal" data-target="#deleteModal">
+							      	<button class="btn btn-danger" data-fid="{{$list->id_genre_film}}" data-toggle="modal" data-target="#deletegenre">
 							      		Delete
 							      	</button> 
 							  	</td>
@@ -68,8 +51,8 @@
 		<!-- /.box-body -->
 			<div class="box-footer clearfix">
 				<!-- Tambah Film -->
-				<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#filmModal">
-				  Add New Movie
+				<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#filmgenre">
+				  Add New Genre
 				</button>
 	            <ul class="pagination pagination-sm no-margin pull-right">
 	                <li><a href="#">«</a></li>
@@ -84,17 +67,20 @@
 
 	<!-- Button trigger modal -->
 	<!-- Modal -->
-	<div class="modal fade" id="filmModal" tabindex="-1" role="dialog" aria-labelledby="filmModal">
+	<div class="modal fade" id="filmgenre" tabindex="-1" role="dialog" aria-labelledby="filmModal">
 	  <div class="modal-dialog" role="document">
 	    <div class="modal-content">
 	      <div class="modal-header">
 	        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-	        <h4 class="modal-title" id="filmModal">New Movie</h4>
+	        <h4 class="modal-title" id="filmModal">New Category</h4>
 	      </div>
-	      <form role="form" action="{{route('admin-film.store')}}" method="post" enctype="multipart/form-data" >
+	      <form role="form" action="{{route('genre.store')}}" method="post" enctype="multipart/form-data" >
 	      	{{csrf_field()}}
 	      	<div class="modal-body">
-	        	@include('admin-film.form')
+	        	<div class="form-group">
+					<label for="genre">Genre</label>
+					<input type="text" class="form-control"  name="genre_film" id="genre_film">
+				</div>
 	      	</div>
 	      	<div class="modal-footer">
 	        	<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -105,19 +91,24 @@
 	  </div>
 	</div>
 	<!-- Edit Film -->
-	<div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModal">
+	<div class="modal fade" id="editgenre" tabindex="-1" role="dialog" aria-labelledby="editModal">
 	  <div class="modal-dialog" role="document">
 	    <div class="modal-content">
 	      <div class="modal-header">
 	        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-	        <h4 class="modal-title" id="filmModal">Edit Movie</h4>
+	        <h4 class="modal-title" id="filmModal">Edit genre</h4>
 	      </div>
-	      <form action="{{route('admin-film.update','test')}}" method="post" enctype="multipart/form-data">
+	      <form action="{{route('genre.update','test')}}" method="post" enctype="multipart/form-data">
 	      	{{method_field('patch')}}
 	      	{{csrf_field()}}
 	      	<div class="modal-body">
-	      		<input type="hidden" name="id_film" id="id_film" value="">
-	        	@include('admin-film.form')
+	      		<input type="hidden" name="id_genre" id="id_genre" value="">
+	        	<div class="modal-body">
+	        	<div class="form-group">
+					<label for="genre">Genre</label>
+					<input type="text" class="form-control"  name="genre_film" id="genre_film">
+				</div>
+	      	</div>
 	      	</div>
 	      	<div class="modal-footer">
 	        	<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -129,19 +120,19 @@
 	</div>
 
 	<!-- Delete Film -->
-	<div class="modal modal-danger fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModal">
+	<div class="modal modal-danger fade" id="deletegenre" tabindex="-1" role="dialog" aria-labelledby="deleteModal">
 	  <div class="modal-dialog" role="document">
 	    <div class="modal-content">
 	      <div class="modal-header">
 	        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 	        <h4 class="text-center modal-title" id="deleteModal">Delete Confirmation</h4>
 	      </div>
-	      <form action="{{route('admin-film.destroy','test')}}" method="post">
+	      <form action="{{route('genre.destroy','test')}}" method="post">
 	      	{{method_field('delete')}}
 	      	{{csrf_field()}}
 	      	<div class="modal-body">
-	      		<p class="text-center">Yakin Ingin Menghapus Film ?</p>
-	      		<input type="hidden" name="id_film" id="id_film" value="">
+	      		<p class="text-center">Yakin Ingin Menghapus genre ?</p>
+	      		<input type="hidden" name="id_genre" id="id_genre" value="">
 	        	
 	      	</div>
 	      	<div class="modal-footer">

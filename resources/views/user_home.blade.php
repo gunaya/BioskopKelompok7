@@ -2,39 +2,44 @@
 
 @section('content')
 
-<!-- Bootstrap core CSS -->
-<link href="{{asset('agency/vendor/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
-
-  <!-- Movie Grid -->
-  <section class="bg-light" id="portfolio">
-      <div class="container">
-      <div class="row">
-          <div class="col-lg-12 text-center">
-            <h2 class="section-heading text-uppercase">Movie List</h2>
-            <h3 class="section-subheading text-muted">Now Playing</h3>
-          </div>
-        </div>
-        <div class="row">
+<!-- Movie Grid -->
+<section class="bg-light" id="portfolio">
+  <div class="container">
+    <div class="row">
         @foreach($film as $listFilm) 
           <div class="col-md-4 col-sm-6 portfolio-item">
-            <a class="portfolio-link" data-toggle="modal" href="#portfolioModal1">
-              <div class="portfolio-hover">
-                <div class="portfolio-hover-content">
-                
-                </div>
-              </div>
-              <img class="" src="{{asset('upload/images/'.$listFilm->image) }}" alt="">
-            </a>
+              <img class="img-fluid" src="{{asset('upload/images/'.$listFilm->image) }}" alt="" style="width: 100%; height: 200px;">
             <div class="portfolio-caption">
-            <span>{{$listFilm->nama_film}}</span> 
-              <div class="panel-thumbnails center-block">                                                
-                <div class="btn-group-sm">                                                
-                    <a class="btn btn-success" href="#"> BUY TICKET</a>
-                </div>    
+              <h4>{{($listFilm->nama_film)}}</h4>
+              <br>
+              <button type="submit" class="btn btn-outline-success btn-sm" data-toggle="modal" data-target="#tayangModal">Buy Ticket</button>
             </div>
           </div>
-          @endforeach
-    </section>
+        @endforeach
+    </div>
+  </div>
+</section>
+
+<!-- Modal Tayang -->
+<div class="modal fade" id="tayangModal" tabindex="-1" role="dialog" aria-labelledby="tayangModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="tayangModalLabel">Jadwal Tayang</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 
 @endsection

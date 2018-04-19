@@ -164,8 +164,8 @@ desired effect
           </a>
           <ul class="treeview-menu">
             <li><a href="{{url('admin-film')}}">Movie</a></li>
-            <li><a href="#">Kategori</a></li>
-            <li><a href="#">Genre</a></li>
+            <li><a href="{{url('kategori')}}">Kategori</a></li>
+            <li><a href="{{url('genre')}}">Genre</a></li>
           </ul>
         </li>
         <li class="treeview">
@@ -230,6 +230,7 @@ desired effect
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.21.0/moment.min.js"></script>
 <!-- Edit Film -->
 <script src="{{asset('js/editFilm.js')}}"></script>
+<script src="{{asset('js/editKateGenre.js')}}"></script>
 <script src="{{asset('js/bootstrap-datetimepicker.min.js')}}"></script>
 
 
