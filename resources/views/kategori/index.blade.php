@@ -35,7 +35,7 @@
 							    <td>{{$list->kategori}}</td>
 							    <td>{{$list->min_umur}}</td>
 							    <td>{{$list->max_umur}}</td>
-							    <td>
+							    <td style="text-align: right">
 							      	<button class="btn btn-info" data-toggle="modal"
 							      			data-fid="{{$list->id_kategori}}" 
 							      			data-fkategori="{{$list->kategori}}"

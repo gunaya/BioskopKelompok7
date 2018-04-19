@@ -23,7 +23,7 @@
 					    <tr>
 					      <th>ID</th>
 					      <th>Genre</th>
-					      <th> </th>
+					      <th></th>
 					    </tr>
 				  	</thead>
 				    <tbody>
@@ -31,7 +31,7 @@
 						    <tr>
 						    	<td>{{$list->id_genre_film}}</td>
 							    <td>{{$list->genre_film}}</td>
-							    <td>
+							    <td style="text-align: right">
 							      	<button class="btn btn-info" data-toggle="modal"
 							      			data-fid="{{$list->id_genre_film}}" 
 							      			data-fgenre="{{$list->genre_film}}"

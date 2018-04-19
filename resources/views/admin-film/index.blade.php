@@ -28,7 +28,7 @@
 					      <th>Pemain</th>
 					      <th>Sinopsis</th>
 					      <th>Image</th>
-					      <th>Modify</th>
+					      <th style="text-align: center">Modify</th>
 					    </tr>
 				  	</thead>
 				    <tbody>
@@ -41,7 +41,7 @@
 							    <td>{{$list->pemain}}</td>
 							    <td>{{str_limit($list->sinopsis, 30)}}</td>
 							    <td>{{str_limit($list->image, 10)}}</td>
-							    <td>
+							    <td style="text-align: right">
 							      	<button class="btn btn-info" data-toggle="modal"
 							      			data-fid="{{$list->id_film}}" 
 							      			data-fnama="{{$list->nama_film}}"
