@@ -4,7 +4,7 @@
 </div>
 <div class="form-group">
     <label for="tahun_produksi">Tahun Rilis</label>
-    <div class='input-group date' id='datetimepicker1'>
+    <div class='input-group date datetimepicker1' id='datetimepicker1'>
         <input type='text' class="form-control" id='tahun_produksi' name="tahun_produksi" />
         <span class="input-group-addon">
             <span class="glyphicon glyphicon-calendar"></span>
