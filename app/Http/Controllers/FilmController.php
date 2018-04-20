@@ -19,7 +19,7 @@ class FilmController extends Controller
      */
     public function index()
     {
-        $listFilm = Film::all();
+        $listFilm = \App\Film::paginate(7);
         return view('admin-film.index',compact('listFilm'));
     }
 
@@ -133,7 +133,15 @@ class FilmController extends Controller
 
     public function show_film()
     {
-        $film = Film::all();
+        $film = \App\Film::paginate(12);
         return view('/user_home',compact('film'));
+    }
+
+    public function search(Request $request)
+    {
+        $query = $request->get('cari');
+        $hasil = Film::where('nama_film', 'LIKE', '%' . $query . '%')->paginate(7);
+
+        return view('admin-film.result', compact('hasil', 'query'));
     }
 }

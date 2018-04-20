@@ -30,7 +30,7 @@
 					    </tr>
 				  	</thead>
 				    <tbody>
-				    	@foreach($genre as $list)
+				    	@foreach($hasil as $list)
 						    <tr>
 						    	<td>{{$list->id_genre_film}}</td>
 							    <td>{{$list->genre_film}}</td>
@@ -58,7 +58,7 @@
 				  Add New Genre
 				</button>
 	            <ul class="pagination pagination-sm no-margin pull-right">
-	                {{ $genre->links() }}
+	                {{ $hasil->links() }}
 	            </ul>
 	        </div>
 		</div>

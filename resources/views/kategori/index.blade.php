@@ -7,13 +7,16 @@
 			  <h3 class="box-title">All Categories</h3>
 
 			  <div class="box-tools">
-			    <div class="input-group input-group-sm" style="width: 150px;">
-			      <input type="text" name="table_search" class="form-control pull-right" placeholder="Search">
+			    <form action="{{ url('queryKat')}}" method="GET">
+				    <div class="input-group input-group-sm" style="width: 150px;">
+				      <input type="text" name="cari" id="cari" class="form-control pull-right" placeholder="Search">
 
-			      <div class="input-group-btn">
-			        <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
-			      </div>
-			    </div>
+				      <div class="input-group-btn">
+				        <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
+				      </div>
+				    </div>
+
+			  	  </form>
 			  </div>
 			</div>
 			<!-- /.box-header -->
@@ -61,11 +64,7 @@
 				  Add New Movie
 				</button>
 	            <ul class="pagination pagination-sm no-margin pull-right">
-	                <li><a href="#">«</a></li>
-	                <li><a href="#">1</a></li>
-	                <li><a href="#">2</a></li>
-	                <li><a href="#">3</a></li>
-	                <li><a href="#">»</a></li>
+	                {{ $kategori->links() }}
 	            </ul>
 	        </div>
 		</div>

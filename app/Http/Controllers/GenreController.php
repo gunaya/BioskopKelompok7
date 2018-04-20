@@ -14,7 +14,7 @@ class GenreController extends Controller
      */
     public function index()
     {
-        $genre = tb_genre_film::all();
+        $genre = tb_genre_film::paginate(7);
         return view('genre.index',compact('genre'));
     }
 
@@ -89,5 +89,13 @@ class GenreController extends Controller
         $genre_id = tb_genre_film::FindOrFail($request->id_genre);
         $genre_id->delete();
         return back();
+    }
+
+    public function search(Request $request)
+    {
+        $query = $request->get('cari');
+        $hasil = tb_genre_film::where('genre_film', 'LIKE', '%' . $query . '%')->paginate(7);
+
+        return view('genre.result', compact('hasil', 'query'));
     }
 }

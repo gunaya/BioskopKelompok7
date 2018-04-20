@@ -38,5 +38,10 @@ Route::resource('admin-film','FilmController');
 Route::get('/user_home','FilmController@show_film')->name('user_home');
 Route::get('/tayang','TayangController@show');
 
+// Search Route
+Route::get('query','FilmController@search');
+Route::get('queryKat','KategoriController@search');
+Route::get('queryGen','GenreController@search');
+
 Route::resource('kategori','KategoriController');
 Route::resource('genre','GenreController');

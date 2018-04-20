@@ -4,10 +4,10 @@
 	<div class="">
 		<div class="box">
 			<div class="box-header">
-			  <h3 class="box-title">All Genres</h3>
+			  <h3 class="box-title">All Categories</h3>
 
 			  <div class="box-tools">
-			    <form action="{{ url('queryGen')}}" method="GET">
+			    <form action="{{ url('queryKat')}}" method="GET">
 				    <div class="input-group input-group-sm" style="width: 150px;">
 				      <input type="text" name="cari" id="cari" class="form-control pull-right" placeholder="Search">
 
@@ -25,24 +25,30 @@
 				  	<thead>
 					    <tr>
 					      <th>ID</th>
-					      <th>Genre</th>
-					      <th></th>
+					      <th>Kategori</th>
+					      <th>Umur Min</th>
+					      <th>Umur Max</th>
+					      <th> </th>
 					    </tr>
 				  	</thead>
 				    <tbody>
-				    	@foreach($genre as $list)
+				    	@foreach($hasil as $list)
 						    <tr>
-						    	<td>{{$list->id_genre_film}}</td>
-							    <td>{{$list->genre_film}}</td>
+						    	<td>{{$list->id_kategori}}</td>
+							    <td>{{$list->kategori}}</td>
+							    <td>{{$list->min_umur}}</td>
+							    <td>{{$list->max_umur}}</td>
 							    <td style="text-align: right">
 							      	<button class="btn btn-info" data-toggle="modal"
-							      			data-fid="{{$list->id_genre_film}}" 
-							      			data-fgenre="{{$list->genre_film}}"
-							      			data-target="#editgenre">
+							      			data-fid="{{$list->id_kategori}}" 
+							      			data-fkategori="{{$list->kategori}}"
+							      			data-fmin="{{$list->min_umur}}"
+							      			data-fmax="{{$list->max_umur}}"
+							      			data-target="#editKategori">
 							      		Edit
 							      	</button>
 							      			/ 
-							      	<button class="btn btn-danger" data-fid="{{$list->id_genre_film}}" data-toggle="modal" data-target="#deletegenre">
+							      	<button class="btn btn-danger" data-fid="{{$list->id_kategori}}" data-toggle="modal" data-target="#deleteKategori">
 							      		Delete
 							      	</button> 
 							  	</td>
@@ -54,11 +60,11 @@
 		<!-- /.box-body -->
 			<div class="box-footer clearfix">
 				<!-- Tambah Film -->
-				<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#filmgenre">
-				  Add New Genre
+				<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#filmKategori">
+				  Add New Movie
 				</button>
 	            <ul class="pagination pagination-sm no-margin pull-right">
-	                {{ $genre->links() }}
+	                {{ $hasil->links() }}
 	            </ul>
 	        </div>
 		</div>
@@ -66,19 +72,27 @@
 
 	<!-- Button trigger modal -->
 	<!-- Modal -->
-	<div class="modal fade" id="filmgenre" tabindex="-1" role="dialog" aria-labelledby="filmModal">
+	<div class="modal fade" id="filmKategori" tabindex="-1" role="dialog" aria-labelledby="filmModal">
 	  <div class="modal-dialog" role="document">
 	    <div class="modal-content">
 	      <div class="modal-header">
 	        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 	        <h4 class="modal-title" id="filmModal">New Category</h4>
 	      </div>
-	      <form role="form" action="{{route('genre.store')}}" method="post" enctype="multipart/form-data" >
+	      <form role="form" action="{{route('kategori.store')}}" method="post" enctype="multipart/form-data" >
 	      	{{csrf_field()}}
 	      	<div class="modal-body">
 	        	<div class="form-group">
-					<label for="genre">Genre</label>
-					<input type="text" class="form-control"  name="genre_film" id="genre_film">
+					<label for="kategori">Kategori</label>
+					<input type="text" class="form-control"  name="kategori" id="kategori">
+				</div>
+				<div class="form-group">
+				    <label for="min_umur">Umur Minimal</label>
+				    <input type="text" class="form-control"  name="min_umur" id="min_umur">
+				</div>
+				<div class="form-group">
+					<label for="max_umur">Umur Maksimal</label>
+					<input type="text" class="form-control"  name="max_umur" id="max_umur">
 				</div>
 	      	</div>
 	      	<div class="modal-footer">
@@ -90,22 +104,30 @@
 	  </div>
 	</div>
 	<!-- Edit Film -->
-	<div class="modal fade" id="editgenre" tabindex="-1" role="dialog" aria-labelledby="editModal">
+	<div class="modal fade" id="editKategori" tabindex="-1" role="dialog" aria-labelledby="editModal">
 	  <div class="modal-dialog" role="document">
 	    <div class="modal-content">
 	      <div class="modal-header">
 	        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-	        <h4 class="modal-title" id="filmModal">Edit genre</h4>
+	        <h4 class="modal-title" id="filmModal">Edit Kategori</h4>
 	      </div>
-	      <form action="{{route('genre.update','test')}}" method="post" enctype="multipart/form-data">
+	      <form action="{{route('kategori.update','test')}}" method="post" enctype="multipart/form-data">
 	      	{{method_field('patch')}}
 	      	{{csrf_field()}}
 	      	<div class="modal-body">
-	      		<input type="hidden" name="id_genre" id="id_genre" value="">
+	      		<input type="hidden" name="id_kategori" id="id_kategori" value="">
 	        	<div class="modal-body">
 	        	<div class="form-group">
-					<label for="genre">Genre</label>
-					<input type="text" class="form-control"  name="genre_film" id="genre_film">
+					<label for="kategori">Kategori</label>
+					<input type="text" class="form-control"  name="kategori" id="kategori">
+				</div>
+				<div class="form-group">
+				    <label for="min_umur">Umur Minimal</label>
+				    <input type="text" class="form-control"  name="min_umur" id="min_umur">
+				</div>
+				<div class="form-group">
+					<label for="max_umur">Umur Maksimal</label>
+					<input type="text" class="form-control"  name="max_umur" id="max_umur">
 				</div>
 	      	</div>
 	      	</div>
@@ -119,19 +141,19 @@
 	</div>
 
 	<!-- Delete Film -->
-	<div class="modal modal-danger fade" id="deletegenre" tabindex="-1" role="dialog" aria-labelledby="deleteModal">
+	<div class="modal modal-danger fade" id="deleteKategori" tabindex="-1" role="dialog" aria-labelledby="deleteModal">
 	  <div class="modal-dialog" role="document">
 	    <div class="modal-content">
 	      <div class="modal-header">
 	        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 	        <h4 class="text-center modal-title" id="deleteModal">Delete Confirmation</h4>
 	      </div>
-	      <form action="{{route('genre.destroy','test')}}" method="post">
+	      <form action="{{route('kategori.destroy','test')}}" method="post">
 	      	{{method_field('delete')}}
 	      	{{csrf_field()}}
 	      	<div class="modal-body">
-	      		<p class="text-center">Yakin Ingin Menghapus genre ?</p>
-	      		<input type="hidden" name="id_genre" id="id_genre" value="">
+	      		<p class="text-center">Yakin Ingin Menghapus Kategori ?</p>
+	      		<input type="hidden" name="id_kategori" id="id_kategori" value="">
 	        	
 	      	</div>
 	      	<div class="modal-footer">

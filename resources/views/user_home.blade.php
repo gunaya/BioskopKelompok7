@@ -19,6 +19,20 @@
     </div>
   </div>
 </section>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-4">
+      </div>
+      <div class="col-xs-4 ml-auto mr-auto">
+        <ul class="pagination pagination-md">
+            {{ $film->links() }}    
+        </ul>
+      </div>
+      <div class="col-md-4">
+      </div>
+    </div>
+  </div> 
+
 
 <!-- Modal Tayang -->
 <div class="modal fade" id="tayangModal" tabindex="-1" role="dialog" aria-labelledby="tayangModalLabel" aria-hidden="true">

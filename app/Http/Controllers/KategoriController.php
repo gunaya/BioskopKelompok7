@@ -16,7 +16,7 @@ class KategoriController extends Controller
      */
     public function index()
     {
-        $kategori = Kategori::all();
+        $kategori = Kategori::paginate(7);
         return view('kategori.index',compact('kategori'));
     }
 
@@ -90,5 +90,13 @@ class KategoriController extends Controller
         $kategori_id = Kategori::FindOrFail($request->id_kategori);
         $kategori_id->delete();
         return back();
+    }
+
+    public function search(Request $request)
+    {
+        $query = $request->get('cari');
+        $hasil = Kategori::where('kategori', 'LIKE', '%' . $query . '%')->paginate(7);
+
+        return view('kategori.result', compact('hasil', 'query'));
     }
 }

@@ -102,7 +102,11 @@
           @guest
             <a class="btn btn-primary btn-xl text-uppercase js-scroll-trigger" href="{{ route('register') }}">Register</a>
           @else
-            <a class="btn btn-primary btn-xl text-uppercase js-scroll-trigger" href="{{ route('user_home') }}">Browse Movies</a>
+            @if(Auth::user()->admin == 1)
+              <a class="btn btn-primary btn-xl text-uppercase js-scroll-trigger" href="{{ route('admin_home') }}">Dashboard</a>
+            @else
+              <a class="btn btn-primary btn-xl text-uppercase js-scroll-trigger" href="{{ route('user_home') }}">Browse Movies</a>
+            @endif
           @endguest
         </div>
       </div>
