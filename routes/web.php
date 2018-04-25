@@ -45,3 +45,8 @@ Route::get('queryGen','GenreController@search');
 
 Route::resource('kategori','KategoriController');
 Route::resource('genre','GenreController');
+
+Route::get('/film/{film_id}','DetFilmController@index');
+Route::resource('film','DetFilmController');
+
+Route::resource('profile','ProfilController');
