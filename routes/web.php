@@ -47,6 +47,8 @@ Route::resource('kategori','KategoriController');
 Route::resource('genre','GenreController');
 
 Route::get('/film/{film_id}','DetFilmController@index');
+Route::get('/film/{film_id}/{id_tayang}','DetFilmController@kursi');
+
 Route::resource('film','DetFilmController');
 
 Route::resource('profile','ProfilController');

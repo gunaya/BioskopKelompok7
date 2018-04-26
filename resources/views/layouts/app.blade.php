@@ -150,6 +150,9 @@
     <!-- Custom scripts for this template -->
     <script src="{{asset('agency/js/agency_fix.js')}}"></script>
 
+    {{-- Ajax --}}
+    <script src="{{asset('js/ajax.js')}}"></script>
+
   </body>
 
 </html>

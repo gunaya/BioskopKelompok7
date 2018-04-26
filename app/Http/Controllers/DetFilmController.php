@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Film;
+use App\Tayang;
+use App\ListKursi;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -17,8 +19,9 @@ class DetFilmController extends Controller
     {
         //$query = $request->get('film_id');
         $hasil = Film::where('id_film', $film_id)->get();
+        $tayang = Tayang::where('id_film', $film_id)->get();
         //dd($hasil->all());
-        return view('film.index',compact('hasil'));
+        return view('film.index',compact('hasil','tayang'));
     }
 
     /**
@@ -85,5 +88,16 @@ class DetFilmController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function kursi()
+    {
+            $id = $_GET['id'];
+            $hasil = ListKursi::where('id_tayang', $id)->get();
+            //dd($data->all());
+
+            return $hasil;
+        
+        
     }
 }
