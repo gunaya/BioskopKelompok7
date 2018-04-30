@@ -74,7 +74,7 @@
                         {{ Auth::user()->name }} <span class="caret"></span>
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="{{url('profile')}}">
+                        <a class="dropdown-item" href="/profile/{{Auth::user()->id}}">
                             PROFILE </a>
                         <a class="dropdown-item" href="{{ route('logout') }}"
                            onclick="event.preventDefault();

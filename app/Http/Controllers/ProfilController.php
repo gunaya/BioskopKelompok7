@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -12,9 +13,10 @@ class ProfilController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($user_id)
     {
-        return view('profile.index');
+        $hasil = User::where('id', $user_id)->get();
+        return view('profile.index',compact('hasil'));
     }
 
     /**

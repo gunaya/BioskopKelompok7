@@ -21,10 +21,18 @@ $('#kursi').on('click',function(e){
 
     	$('#list_kursi').show();
         $.each(data, function(row){
-        	$('#list_kursi').append("<button id='kursiL'>" + data[row].id_kursi + "</button>");
+            if (data[row].status == 'tersedia') 
+            {
+                $('#list_kursi').append("<a class='btn btn-primary' href='/transaksi/"+data[row].id_list_kursi+"/' role='button'>" + data[row].id_kursi + "</a>");
+            } 
+            else 
+            {
+                $('#list_kursi').append("<a class='btn btn-secondary disabled' href='#' role='button'>" + data[row].id_kursi + "</a>");
+            }
+
         });
     }).fail(function(){
     	$('#list_kursi').show();
-        //$('.modal-body').html('<i class="glyphicon glyphicon-info-sign"></i> Something went wrong, Please try again...');
+        $('.modal-body').html('<i class="glyphicon glyphicon-info-sign"></i> Something went wrong, Please try again...');
     });
 });

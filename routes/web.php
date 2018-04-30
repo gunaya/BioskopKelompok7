@@ -50,5 +50,8 @@ Route::get('/film/{film_id}','DetFilmController@index');
 Route::get('/film/{film_id}/{id_tayang}','DetFilmController@kursi');
 
 Route::resource('film','DetFilmController');
+Route::get('profile/{user_id}','ProfilController@index');
+Route::get('profile','ProfilController@show');
 
-Route::resource('profile','ProfilController');
+Route::get('transaksi/{list_id}','TransaksiController@index');
+Route::post('transaksi/berhasil','TransaksiController@booking')->name('booking');
