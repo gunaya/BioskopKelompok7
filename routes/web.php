@@ -53,5 +53,7 @@ Route::resource('film','DetFilmController');
 Route::get('profile/{user_id}','ProfilController@index');
 Route::get('profile','ProfilController@show');
 
+
 Route::get('transaksi/{list_id}','TransaksiController@index');
-Route::post('transaksi/berhasil','TransaksiController@booking')->name('booking');
+Route::post('transaksi','TransaksiController@kirimData')->name('booking');
+Route::get('transaksi/checkout/{user_id}','TransaksiController@check')->name('checkout');

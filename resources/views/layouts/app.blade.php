@@ -61,7 +61,7 @@
                 </li>
             @else
                 <li class="nav-item">
-                    <a class="nav-link js-scroll-trigger" href="#services">Services</a>
+                    <a class="nav-link js-scroll-trigger" href="/transaksi/checkout/{{Auth::user()->id}}">Checkout</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link js-scroll-trigger" href="#portfolio">Portfolio</a>

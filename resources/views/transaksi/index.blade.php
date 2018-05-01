@@ -18,13 +18,6 @@
 					<label for="harga_tiket">Harga Tiket</label>
 					<input type="text" class="form-control"  name="harga_tiket" id="harga_tiket" value="{{$data->harga_tiket}}" readonly>
 				</div>
-				<div class="form-group">
-					<label for="method">Metode Pembayaran</label>
-					<select class="form-control"  name="method" id="method">
-						<option value="transfer">Transfer</option>
-						<option value="kartu_kredit">Kartu Kredit</option>
-					</select>
-				</div>
 				<input type="hidden" name="id_user" id="id_user" value="{{Auth::user()->id}}">
 				<input type="hidden" name="id_list_kursi" id="id_list_kursi" value="{{$data->id_list_kursi}}">
 				<input type="hidden" name="status" id="status" value="belum_lunas">

@@ -22,22 +22,93 @@ class TransaksiController extends Controller
     	return view('transaksi.index',compact('hasil'));
     }
 
-    public function booking(Request $request)
+    public function kirimData(Request $request)
     {
-    	$booking = Booking::create($request->except('id_list_kursi'));
+		return $this->getBooking($request);
+    }
 
-		$detBooking = DetBooking::create([
-		        'id_booking' => $booking->id_booking,
-		        'harga' => $request->get('harga_tiket'),
-		        'id_list_kursi' => $request->get('id_list_kursi')
-		]);
+    public function getBooking($request)
+    {
 
-		$transaksi = Transaksi::create([
-				'id_booking' => $booking->id_booking,
-				'method' => $request->get('method'),
-				'id_user' => $request->get('id_user')
-		]);
+    	$id = $request->get('id_user');
+    	$id_book = Booking::where('id_user', $id)
+    			->where('status','belum_lunas')
+    			->select('id_booking')
+    			->first();
+    	$id_user = Booking::where('id_user', $id)
+    			->where('status','belum_lunas')
+    			->select('id_user')
+    			->first();
+    	$status = Booking::where('id_user', $id)
+    			->where('status','belum_lunas')
+    			->select('status')
+    			->first();
 
-		return view('transaksi.berhasil');
+    	return $this->detBooking($id_book, $id_user, $status, $request);
+    }
+
+    public function detBooking($id_book, $id_user, $status, $request)
+    {
+    	$id = $request->get('id_user');
+
+    	if (empty($id_book->id_booking)) {
+    		$booking = Booking::create($request->except('id_list_kursi'));
+
+    		$detBooking = DetBooking::create([
+			        'id_booking' => $booking->id_booking,
+			        'harga' => $request->get('harga_tiket'),
+			        'id_list_kursi' => $request->get('id_list_kursi')
+			]);
+    	} elseif ($id_user->id_user == $id && $status->status == 'belum_lunas') {
+    		$detBooking = DetBooking::create([
+			        'id_booking' => $id_book->id_booking,
+			        'harga' => $request->get('harga_tiket'),
+			        'id_list_kursi' => $request->get('id_list_kursi')
+			]);
+    	} else {
+    		$booking = Booking::create($request->except('id_list_kursi'));
+
+    		$detBooking = DetBooking::create([
+			        'id_booking' => $booking->id_booking,
+			        'harga' => $request->get('harga_tiket'),
+			        'id_list_kursi' => $request->get('id_list_kursi')
+			]);
+		}
+    	
+		return $this->checkOut($request);
+    }
+
+    public function checkOut($request)
+    {
+    	$id = $request->get('id_user');
+
+    	$hasil = Booking::join('tb_det_booking', 'tb_det_booking.id_booking','=','tb_booking.id_booking')
+    		->leftJoin('tb_list_kursi','tb_det_booking.id_list_kursi','=','tb_list_kursi.id_list_kursi')
+    		->leftJoin('tb_tayang','tb_list_kursi.id_tayang','=','tb_tayang.id_tayang')
+    		->leftJoin('tb_film','tb_tayang.id_film','=','tb_film.id_film')
+    		->WHERE('tb_booking.id_user',$id)
+    		->where('tb_booking.status','belum_lunas')
+    		->select('nama_film','harga','tb_booking.id_booking')
+        	->get();
+
+        //dd($hasil->all());
+
+        return view('transaksi.checkout',compact('hasil'));
+    }
+
+    public function check($user_id)
+    {
+    	$hasil = Booking::join('tb_det_booking', 'tb_det_booking.id_booking','=','tb_booking.id_booking')
+    		->leftJoin('tb_list_kursi','tb_det_booking.id_list_kursi','=','tb_list_kursi.id_list_kursi')
+    		->leftJoin('tb_tayang','tb_list_kursi.id_tayang','=','tb_tayang.id_tayang')
+    		->leftJoin('tb_film','tb_tayang.id_film','=','tb_film.id_film')
+    		->WHERE('tb_booking.id_user',$user_id)
+    		->where('tb_booking.status','belum_lunas')
+    		->select('nama_film','harga','tb_booking.id_booking')
+        	->get();
+
+        //dd($hasil->all());
+
+        return view('transaksi.checkout',compact('hasil'));
     }
 }
