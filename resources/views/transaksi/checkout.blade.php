@@ -6,7 +6,7 @@
 			<div class="box-header">
 				<h3>Hello World</h3>
 			</div>
-			<div class="box-bodyno-padding">
+			<div class="box-body no-padding">
 				<table class="table">
 					<thead>
 						<tr>

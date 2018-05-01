@@ -51,7 +51,7 @@ Route::get('/film/{film_id}/{id_tayang}','DetFilmController@kursi');
 
 Route::resource('film','DetFilmController');
 Route::get('profile/{user_id}','ProfilController@index');
-Route::get('profile','ProfilController@show');
+Route::post('profile/{user_id}','ProfilController@update');
 
 
 Route::get('transaksi/{list_id}','TransaksiController@index');

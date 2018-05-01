@@ -69,9 +69,29 @@ class ProfilController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+        $image = $request->file('image');
+
+        if (empty($image)) {
+            $filename = '';
+        } else {
+            $filename = $image->getClientOriginalName();
+            $image->move('upload\profile', $filename, file_get_contents($request->file('image')->getRealPath()));
+        }
+
+        
+        $user = User::FindOrFail($request->id);
+        
+        $user -> name = $request->get('name');
+        $user->email = $request->get('email');
+        $user->alamat = $request->get('alamat');
+        $user->telepon = $request->get('telepon');
+        $user->image = $filename;
+        $user->save();
+
+        //$film_id->update($request->all());
+        return back();
     }
 
     /**

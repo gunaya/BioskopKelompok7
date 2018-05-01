@@ -153,6 +153,9 @@
     {{-- Ajax --}}
     <script src="{{asset('js/ajax.js')}}"></script>
 
+    <!-- Edit Profile -->
+    <script src="{{asset('js/editProfil.js')}}"></script>
+
   </body>
 
 </html>
