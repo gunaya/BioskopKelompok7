@@ -85,14 +85,14 @@ desired effect
               <!-- Menu Toggle Button -->
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                 <!-- The user image in the navbar-->
-                <img src="{{asset('admin-lte/dist/img/avatar2.png')}}" class="user-image" alt="User Image">
+                <img src="{{asset('upload/profile/'.Auth::user()->image) }}" class="user-image" alt="User Image">
                 <!-- hidden-xs hides the username on small devices so only the image appears. -->
                 <span class="hidden-xs">{{ Auth::user()->name }}</span>
               </a>
               <ul class="dropdown-menu">
                 <!-- The user image in the menu -->
                 <li class="user-header">
-                  <img src="{{asset('admin-lte/dist/img/avatar2.png')}}" class="img-circle" alt="User Image">
+                  <img src="{{asset('upload/profile/'.Auth::user()->image) }}" class="img-circle" alt="User Image">
                   <p>
                     {{ Auth::user()->name }}
                     <small>Admin since {{ Auth::user()->created_at->month}}-{{ Auth::user()->created_at->year}}</small>
@@ -100,7 +100,7 @@ desired effect
                 <!-- Menu Footer-->
                 <li class="user-footer">
                   <div class="pull-left">
-                    <a href="#" class="btn btn-default btn-flat">Profile</a>
+                    <a href="/profile/{{Auth::user()->id}}" class="btn btn-default btn-flat">Profile</a>
                   </div>
                   <div class="pull-right">
                     <a class="btn btn-default btn-flat" href="{{ route('logout') }}"
@@ -130,7 +130,7 @@ desired effect
       <!-- Sidebar user panel (optional) -->
       <div class="user-panel">
         <div class="pull-left image">
-          <img src="{{asset('admin-lte/dist/img/avatar2.png')}}" class="img-circle" alt="User Image">
+          <img src="{{asset('upload/profile/'.Auth::user()->image) }}" class="img-circle" alt="User Image">
         </div>
         <div class="pull-left info">
           <p>{{ Auth::user()->name }}</p>
@@ -138,18 +138,6 @@ desired effect
           <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
         </div>
       </div>
-
-      <!-- search form (Optional) -->
-      <form action="#" method="get" class="sidebar-form">
-        <div class="input-group">
-          <input type="text" name="q" class="form-control" placeholder="Search...">
-          <span class="input-group-btn">
-              <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>
-              </button>
-            </span>
-        </div>
-      </form>
-      <!-- /.search form -->
 
       <!-- Sidebar Menu -->
       <ul class="sidebar-menu" data-widget="tree">

@@ -97,25 +97,41 @@ class FilmController extends Controller
         //dd($request->all());
 
         $image = $request->file('image');
-        $filename = $image->getClientOriginalName();
-        $image->move('upload\images', $filename, file_get_contents($request->file('image')->getRealPath()));
-
+        if (empty($image)) {
+            $film = Film::FindOrFail($request->id_film);
         
-        $film = Film::FindOrFail($request->id_film);
-        
-        $film -> nama_film = $request->get('nama_film');
-        $film->tahun_produksi = $request->get('tahun_produksi');
-        $film->direksi = $request->get('direksi');
-        $film->pemain = $request->get('pemain');
-        $film->sinopsis = $request->get('sinopsis');
-        $film->bahasa = $request->get('bahasa');
-        $film->image = $filename;
-        $film->id_genre_film = $request->get('id_genre_film');
-        $film->id_kategori = $request->get('id_kategori');
-        $film->save();
+            $film -> nama_film = $request->get('nama_film');
+            $film->tahun_produksi = $request->get('tahun_produksi');
+            $film->direksi = $request->get('direksi');
+            $film->pemain = $request->get('pemain');
+            $film->sinopsis = $request->get('sinopsis');
+            $film->bahasa = $request->get('bahasa');
+            $film->id_genre_film = $request->get('id_genre_film');
+            $film->id_kategori = $request->get('id_kategori');
+            $film->save();
 
-        //$film_id->update($request->all());
-        return back();
+            //$film_id->update($request->all());
+            return back();
+        } else {
+            $filename = $image->getClientOriginalName();
+            $image->move('upload\images', $filename, file_get_contents($request->file('image')->getRealPath()));
+
+            $film = Film::FindOrFail($request->id_film);
+        
+            $film -> nama_film = $request->get('nama_film');
+            $film->tahun_produksi = $request->get('tahun_produksi');
+            $film->direksi = $request->get('direksi');
+            $film->pemain = $request->get('pemain');
+            $film->sinopsis = $request->get('sinopsis');
+            $film->bahasa = $request->get('bahasa');
+            $film->image = $filename;
+            $film->id_genre_film = $request->get('id_genre_film');
+            $film->id_kategori = $request->get('id_kategori');
+            $film->save();
+
+            //$film_id->update($request->all());
+            return back();
+        }
     }
 
     /**

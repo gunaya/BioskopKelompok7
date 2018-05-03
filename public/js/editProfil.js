@@ -5,7 +5,7 @@ $('#editModal').on('show.bs.modal', function (event) {
 	var name = button.data('fname')
 	var email = button.data('femail')
 	var alamat = button.data('falamat')
-	var telepon = button.data('ftelepon')   
+	var telepon = button.data('ftelepon')
 
 
 	var modal = $(this)

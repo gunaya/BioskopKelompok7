@@ -23,11 +23,11 @@ $('#kursi').on('click',function(e){
         $.each(data, function(row){
             if (data[row].status == 'tersedia') 
             {
-                $('#list_kursi').append("<a class='btn btn-primary' href='/transaksi/"+data[row].id_list_kursi+"/' role='button'>" + data[row].id_kursi + "</a>");
+                $('#list_kursi').append("<a class='btn btn-primary' href='/transaksi/"+data[row].id_list_kursi+"/' role='button'>" + data[row].id_kursi + "</a> &emsp;");
             } 
             else 
             {
-                $('#list_kursi').append("<a class='btn btn-secondary disabled' href='#' role='button'>" + data[row].id_kursi + "</a>");
+                $('#list_kursi').append("<a class='btn btn-secondary disabled' href='#' role='button'>" + data[row].id_kursi + "</a> &emsp;");
             }
 
         });

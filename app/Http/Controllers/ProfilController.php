@@ -74,24 +74,33 @@ class ProfilController extends Controller
         $image = $request->file('image');
 
         if (empty($image)) {
-            $filename = '';
+            $user = User::FindOrFail($request->id);
+        
+            $user -> name = $request->get('name');
+            $user->email = $request->get('email');
+            $user->alamat = $request->get('alamat');
+            $user->telepon = $request->get('telepon');
+            $user->save();
+
+            //$film_id->update($request->all());
+            return back();
+
         } else {
-            $filename = $image->getClientOriginalName();
+            $filename = $request->email. "_" . date('m-d-Y', time()) . '.' . $image->getClientOriginalExtension();
             $image->move('upload\profile', $filename, file_get_contents($request->file('image')->getRealPath()));
+
+            $user = User::FindOrFail($request->id);
+        
+            $user -> name = $request->get('name');
+            $user->email = $request->get('email');
+            $user->alamat = $request->get('alamat');
+            $user->telepon = $request->get('telepon');
+            $user->image = $filename;
+            $user->save();
+
+            //$film_id->update($request->all());
+            return back();
         }
-
-        
-        $user = User::FindOrFail($request->id);
-        
-        $user -> name = $request->get('name');
-        $user->email = $request->get('email');
-        $user->alamat = $request->get('alamat');
-        $user->telepon = $request->get('telepon');
-        $user->image = $filename;
-        $user->save();
-
-        //$film_id->update($request->all());
-        return back();
     }
 
     /**

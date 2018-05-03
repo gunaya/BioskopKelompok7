@@ -31,7 +31,7 @@
   <body id="page-top">
 
     <!-- Navigation -->
-    <nav class="navbar navbar-shrink navbar-dark fixed-top" id="mainNav">
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top navbar-shrink" id="mainNav">
       <div class="container">
         <a class="navbar-brand js-scroll-trigger" href="{{ url('/') }}">Cinemine</a>
         <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
@@ -60,14 +60,27 @@
                     </div>
                 </li>
             @else
+              @if(Auth::user()->admin == 1)
+                <li class="nav-item dropdown">
+                    <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                        {{ Auth::user()->name }} <span class="caret"></span>
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="/profile/{{Auth::user()->id}}">
+                            PROFILE </a>
+                        <a class="dropdown-item" href="{{ route('logout') }}"
+                           onclick="event.preventDefault();
+                                         document.getElementById('logout-form').submit();">
+                            {{ __('Logout') }} </a>
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                            @csrf
+                        </form>
+                        
+                    </div>
+                </li>
+              @else
                 <li class="nav-item">
                     <a class="nav-link js-scroll-trigger" href="/transaksi/checkout/{{Auth::user()->id}}">Checkout</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link js-scroll-trigger" href="#portfolio">Portfolio</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link js-scroll-trigger" href="#contact">Contact</a>
                 </li>
                 <li class="nav-item dropdown">
                     <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
@@ -86,6 +99,7 @@
                         
                     </div>
                 </li>
+              @endif
             @endguest
           </ul>
         </div>

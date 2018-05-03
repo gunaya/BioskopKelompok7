@@ -14,6 +14,7 @@ class TransaksiController extends Controller
 {
     public function index($list_id)
     {
+
     	$hasil = ListKursi::join('tb_tayang', 'tb_list_kursi.id_tayang', '=' , 'tb_tayang.id_tayang')
     		->leftJoin('tb_film','tb_tayang.id_film','=','tb_film.id_film')
     		->WHERE('id_list_kursi',$list_id)
@@ -31,27 +32,21 @@ class TransaksiController extends Controller
     {
 
     	$id = $request->get('id_user');
-    	$id_book = Booking::where('id_user', $id)
+    	$book = Booking::where('id_user', $id)
     			->where('status','belum_lunas')
-    			->select('id_booking')
-    			->first();
-    	$id_user = Booking::where('id_user', $id)
-    			->where('status','belum_lunas')
-    			->select('id_user')
-    			->first();
-    	$status = Booking::where('id_user', $id)
-    			->where('status','belum_lunas')
-    			->select('status')
+    			->select('id_booking','id_user','status')
     			->first();
 
-    	return $this->detBooking($id_book, $id_user, $status, $request);
+    	return $this->detBooking($book, $request);
     }
 
-    public function detBooking($id_book, $id_user, $status, $request)
+    public function detBooking($book, $request)
     {
     	$id = $request->get('id_user');
+        
+        //(date('Y-m-d', strtotime("+1 day")));
 
-    	if (empty($id_book->id_booking)) {
+    	if (empty($book->id_booking)) {
     		$booking = Booking::create($request->except('id_list_kursi'));
 
     		$detBooking = DetBooking::create([
@@ -59,9 +54,9 @@ class TransaksiController extends Controller
 			        'harga' => $request->get('harga_tiket'),
 			        'id_list_kursi' => $request->get('id_list_kursi')
 			]);
-    	} elseif ($id_user->id_user == $id && $status->status == 'belum_lunas') {
+    	} elseif ($book->id_user == $id && $book->status == 'belum_lunas') {
     		$detBooking = DetBooking::create([
-			        'id_booking' => $id_book->id_booking,
+			        'id_booking' => $book->id_booking,
 			        'harga' => $request->get('harga_tiket'),
 			        'id_list_kursi' => $request->get('id_list_kursi')
 			]);
