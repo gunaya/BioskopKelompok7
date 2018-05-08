@@ -7,6 +7,9 @@ use App\DetBooking;
 use App\Transaksi;
 use App\ListKursi;
 use App\Tayang;
+use DateTime;
+use DateTimeZone;
+use DateInterval;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -34,40 +37,106 @@ class TransaksiController extends Controller
     	$id = $request->get('id_user');
     	$book = Booking::where('id_user', $id)
     			->where('status','belum_lunas')
-    			->select('id_booking','id_user','status')
+    			->select('id_booking','id_user','status','batas_transaksi','total_pembayaran')
     			->first();
 
-    	return $this->detBooking($book, $request);
+        if (empty($book->id_booking)) {
+            $id_book = 0;
+        } else {
+            $id_book = $book->id_booking;
+        }
+        $detbook = DetBooking::where('id_booking', $id_book)
+                ->select('harga')
+                ->orderBy('created_at','desc')
+                ->first();
+
+    	return $this->detBooking($book, $detbook, $request);
     }
 
-    public function detBooking($book, $request)
+    public function detBooking($book, $detbook, $request)
     {
     	$id = $request->get('id_user');
         
-        //(date('Y-m-d', strtotime("+1 day")));
+        //set waktu
+        $date = new DateTime();
+        $date->setTimeZone(new DateTimeZone('Asia/Hong_Kong'));
+
+        $date_now = $date->format('Y-m-d H:i:s');
+
+        $date_1d = $date->add(new DateInterval('P1D')); //menambahkan interval 1 hari
+        $date_batas = $date_1d->format('Y-m-d H:i:s');
 
     	if (empty($book->id_booking)) {
-    		$booking = Booking::create($request->except('id_list_kursi'));
+    		$booking = Booking::create([
+                    'status' => 'belum_lunas',
+                    'total_pembayaran' => $request->get('harga_tiket'),
+                    'batas_transaksi' => $date_batas,
+                    'id_user' => $id
+            ]);
 
     		$detBooking = DetBooking::create([
 			        'id_booking' => $booking->id_booking,
 			        'harga' => $request->get('harga_tiket'),
 			        'id_list_kursi' => $request->get('id_list_kursi')
 			]);
-    	} elseif ($book->id_user == $id && $book->status == 'belum_lunas') {
+
+            $listKursi = ListKursi::where('id_list_kursi', $request->get('id_list_kursi'))
+                                ->update(['status' => 'terpesan']);
+
+        } elseif ($book->id_user == $id && $book->status == 'belum_lunas' && $book->batas_transaksi < $date_now) {
+            $booking = Booking::where('id_booking',$book->id_booking)
+                                ->update(['status' => 'gagal']);
+
+            $booking = Booking::create([
+                    'status' => 'belum_lunas',
+                    'total_pembayaran' => $request->get('harga_tiket'),
+                    'batas_transaksi' => $date_batas,
+                    'id_user' => $id
+            ]);
+
+            $detBooking = DetBooking::create([
+                    'id_booking' => $booking->id_booking,
+                    'harga' => $request->get('harga_tiket'),
+                    'id_list_kursi' => $request->get('id_list_kursi')
+            ]);
+
+            $listKursi = ListKursi::where('id_list_kursi', $request->get('id_list_kursi'))
+                                ->update(['status' => 'terpesan']);
+                                
+        } elseif ($book->id_user == $id && $book->status == 'belum_lunas') {
+            $harga_baru = $detbook->harga;
+            $harga_sebelum = $book->total_pembayaran;
+            $tot = $harga_baru+$harga_sebelum;
+
+            $booking = Booking::where('id_booking',$book->id_booking)
+                                ->update(['total_pembayaran' => $tot]);
+
     		$detBooking = DetBooking::create([
 			        'id_booking' => $book->id_booking,
 			        'harga' => $request->get('harga_tiket'),
 			        'id_list_kursi' => $request->get('id_list_kursi')
 			]);
+
+            $listKursi = ListKursi::where('id_list_kursi', $request->get('id_list_kursi'))
+                                ->update(['status' => 'terpesan']);
+                                
+
     	} else {
-    		$booking = Booking::create($request->except('id_list_kursi'));
+    		$booking = Booking::create([
+                    'status' => 'belum_lunas',
+                    'batas_transaksi' => $date_batas,
+                    'id_user' => $id
+            ]);
 
     		$detBooking = DetBooking::create([
 			        'id_booking' => $booking->id_booking,
 			        'harga' => $request->get('harga_tiket'),
 			        'id_list_kursi' => $request->get('id_list_kursi')
 			]);
+
+            $listKursi = ListKursi::where('id_list_kursi', $request->get('id_list_kursi'))
+                                ->update(['status' => 'terpesan']);
+                                
 		}
     	
 		return $this->checkOut($request);
