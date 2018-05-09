@@ -57,3 +57,7 @@ Route::post('profile/{user_id}','ProfilController@update');
 Route::get('transaksi/{list_id}','TransaksiController@index');
 Route::post('transaksi','TransaksiController@kirimData')->name('booking');
 Route::get('transaksi/checkout/{user_id}','TransaksiController@check')->name('checkout');
+Route::match(['get', 'post'],'transaksi/pembayaran/','TransaksiController@pembayaran')->name('pembayaran');
+Route::match(['get', 'post'],'transaksi/pembayaran/kredit','TransaksiController@kredit')->name('success_kredit');
+Route::match(['get', 'post'],'transaksi/pembayaran/transfer','TransaksiController@transfer')->name('success_transfer');
+Route::get('transaksi/status/{user_id}','TransaksiController@status')->name('status');
