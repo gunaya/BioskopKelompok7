@@ -134,8 +134,6 @@ desired effect
         </div>
         <div class="pull-left info">
           <p>{{ Auth::user()->name }}</p>
-          <!-- Status -->
-          <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
         </div>
       </div>
 
@@ -156,6 +154,7 @@ desired effect
             <li><a href="{{url('genre')}}">Genre</a></li>
           </ul>
         </li>
+        <li><a href="{{route('konfirmasi')}}"><i class="fa fa-link"></i> <span>Konfirmasi</span></a></li>
         <li class="treeview">
           <a href="#"><i class="fa fa-link"></i> <span>Lorem</span>
             <span class="pull-right-container">

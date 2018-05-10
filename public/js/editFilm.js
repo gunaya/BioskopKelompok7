@@ -37,3 +37,32 @@ $(function () {
 		format: 'YYYY'
     })
 })
+
+$('#detailTrf').on('show.bs.modal', function (event){
+	console.log('Modal Opened');
+
+	var button = $(event.relatedTarget)
+	var nama = button.data('nama')
+	var bank = button.data('bank')
+	var rek = button.data('rek')
+	var bukti = button.data('bukti')
+	var image = "http://localhost:8000/upload/bukti_trf/"+bukti
+
+	var modal = $(this)
+	modal.find('.modal-body #nama').val(nama)
+	modal.find('.modal-body #bank').val(bank)
+	modal.find('.modal-body #rek').val(rek)
+	modal.find('.modal-body #bukti').attr('src', image);
+})
+
+$('#detailKredit').on('show.bs.modal', function (event){
+	console.log('Modal Opened');
+
+	var button = $(event.relatedTarget)
+	var nama = button.data('nama')
+	var kredit = button.data('kredit')
+
+	var modal = $(this)
+	modal.find('.modal-body #nama').val(nama)
+	modal.find('.modal-body #kredit').val(kredit)
+})
