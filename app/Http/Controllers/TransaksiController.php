@@ -266,7 +266,23 @@ class TransaksiController extends Controller
             ->WHERE('tb_booking.id_user',$user_id)
             ->select('nama_film','tb_kursi.kode_kursi','tb_booking.batas_transaksi','unique_code','tb_tayang.waktu_tayang','tb_booking.status')
             ->get();
+        $trans = Transaksi::where('tb_transaksi.id_user', $user_id)
+            ->select('id_transaksi','method')
+            ->orderBy('created_at','desc')
+            ->first();
 
-        return view('transaksi.status',compact('hasil'));
+        if ($trans->method == 'transfer') {
+            $method = TransferMethod::where('id_transaksi',$trans->id_transaksi)
+                                    ->select('id_trf_bank as id')
+                                    ->orderBy('created_at','desc')
+                                    ->first();
+        } else {
+            $method = KreditMethod::where('id_transaksi',$trans->id_transaksi)
+                                    ->select('id_kartu_kredit as id')
+                                    ->orderBy('created_at','desc')
+                                    ->first();
+        }
+        //dd($trans,$method);
+        return view('transaksi.status',compact('hasil','trans','method'));
     }
 }
