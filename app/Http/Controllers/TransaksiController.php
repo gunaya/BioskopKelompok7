@@ -68,6 +68,7 @@ class TransaksiController extends Controller
 
         $date_1d = $date->add(new DateInterval('P1D')); //menambahkan interval 1 hari
         $date_batas = $date_1d->format('Y-m-d H:i:s');
+        $randomString = substr(str_shuffle('0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'), 0, 10);
 
         if (empty($book->id_booking)) {
             $booking = Booking::create([
@@ -81,7 +82,8 @@ class TransaksiController extends Controller
                     'id_booking' => $booking->id_booking,
                     'harga' => $request->get('harga_tiket'),
                     'id_list_kursi' => $request->get('id_list_kursi'),
-                    'status' => 'pending'
+                    'status' => 'pending',
+                    'unique_code' => $randomString
             ]);
 
             $listKursi = ListKursi::where('id_list_kursi', $request->get('id_list_kursi'))
@@ -102,7 +104,8 @@ class TransaksiController extends Controller
                     'id_booking' => $booking->id_booking,
                     'harga' => $request->get('harga_tiket'),
                     'id_list_kursi' => $request->get('id_list_kursi'),
-                    'status' => 'pending'
+                    'status' => 'pending',
+                    'unique_code' => $randomString
             ]);
 
             $listKursi = ListKursi::where('id_list_kursi', $request->get('id_list_kursi'))
@@ -120,7 +123,8 @@ class TransaksiController extends Controller
                     'id_booking' => $book->id_booking,
                     'harga' => $request->get('harga_tiket'),
                     'id_list_kursi' => $request->get('id_list_kursi'),
-                    'status' => 'pending'
+                    'status' => 'pending',
+                    'unique_code' => $randomString
             ]);
 
             $listKursi = ListKursi::where('id_list_kursi', $request->get('id_list_kursi'))
@@ -138,7 +142,8 @@ class TransaksiController extends Controller
                     'id_booking' => $booking->id_booking,
                     'harga' => $request->get('harga_tiket'),
                     'id_list_kursi' => $request->get('id_list_kursi'),
-                    'status' => 'pending'
+                    'status' => 'pending',
+                    'unique_code' => $randomString
             ]);
 
             $listKursi = ListKursi::where('id_list_kursi', $request->get('id_list_kursi'))
@@ -209,6 +214,10 @@ class TransaksiController extends Controller
                         'id_booking' => $request->get('id_booking'),
                         'id_user' => $request->get('id_user')
             ]);
+
+            DetBooking::where('id_booking',$book_id)
+                      ->update(['status' => 'deal']);
+                      
         } elseif ($cek->id_booking != $book_id) {
             $transaksi = Transaksi::create([
                         'method' => $request->get('method'),
@@ -216,10 +225,18 @@ class TransaksiController extends Controller
                         'id_booking' => $request->get('id_booking'),
                         'id_user' => $request->get('id_user')
             ]);
+
+            DetBooking::where('id_booking',$book_id)
+                      ->update(['status' => 'deal']);
+                      
         } else {
             $transaksi = Transaksi::where('id_booking',$book_id)
                         ->select('id_transaksi','method')
                         ->first();
+
+            DetBooking::where('id_booking',$book_id)
+                      ->update(['status' => 'deal']);
+                      
         }
         return view('transaksi.pembayaran',compact('book','transaksi'));
     }
@@ -256,16 +273,30 @@ class TransaksiController extends Controller
     }
 
     public function status($user_id)
-    {
-        //dd($user_id);
-        $hasil = Booking::join('tb_det_booking', 'tb_det_booking.id_booking','=','tb_booking.id_booking')
+    {  
+
+        $hasilBelum = Booking::join('tb_det_booking', 'tb_det_booking.id_booking','=','tb_booking.id_booking')
             ->leftJoin('tb_list_kursi','tb_det_booking.id_list_kursi','=','tb_list_kursi.id_list_kursi')
             ->leftJoin('tb_tayang','tb_list_kursi.id_tayang','=','tb_tayang.id_tayang')
             ->leftJoin('tb_kursi','tb_list_kursi.id_kursi','=','tb_kursi.id_kursi')
             ->leftJoin('tb_film','tb_tayang.id_film','=','tb_film.id_film')
             ->WHERE('tb_booking.id_user',$user_id)
+            ->where('tb_booking.status','belum_lunas')
+            ->where('tb_tayang.waktu_tayang','>',date("Y-m-d"))
             ->select('nama_film','tb_kursi.kode_kursi','tb_booking.batas_transaksi','unique_code','tb_tayang.waktu_tayang','tb_booking.status')
             ->get();
+
+        $hasilLunas = Booking::join('tb_det_booking', 'tb_det_booking.id_booking','=','tb_booking.id_booking')
+            ->leftJoin('tb_list_kursi','tb_det_booking.id_list_kursi','=','tb_list_kursi.id_list_kursi')
+            ->leftJoin('tb_tayang','tb_list_kursi.id_tayang','=','tb_tayang.id_tayang')
+            ->leftJoin('tb_kursi','tb_list_kursi.id_kursi','=','tb_kursi.id_kursi')
+            ->leftJoin('tb_film','tb_tayang.id_film','=','tb_film.id_film')
+            ->WHERE('tb_booking.id_user',$user_id)
+            ->where('tb_booking.status','lunas')
+            ->where('tb_tayang.waktu_tayang','>',date("Y-m-d"))
+            ->select('nama_film','tb_kursi.kode_kursi','tb_booking.batas_transaksi','unique_code','tb_tayang.waktu_tayang','tb_booking.status')
+            ->get();
+
         $trans = Transaksi::where('tb_transaksi.id_user', $user_id)
             ->select('id_transaksi','method')
             ->orderBy('created_at','desc')
@@ -282,7 +313,6 @@ class TransaksiController extends Controller
                                     ->orderBy('created_at','desc')
                                     ->first();
         }
-        //dd($trans,$method);
-        return view('transaksi.status',compact('hasil','trans','method'));
+        return view('transaksi.status',compact('hasilBelum','hasilLunas','method','status'));
     }
 }

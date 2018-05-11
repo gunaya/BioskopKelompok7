@@ -66,3 +66,12 @@ $('#detailKredit').on('show.bs.modal', function (event){
 	modal.find('.modal-body #nama').val(nama)
 	modal.find('.modal-body #kredit').val(kredit)
 })
+
+$('#confirm').on('show.bs.modal', function (event) {
+	console.log('Modal Opened');
+	var button = $(event.relatedTarget) // Button that triggered the modal
+	var id_transaksi = button.data('fid') 
+
+	var modal = $(this)
+	modal.find('.modal-body #id_transaksi').val(id_transaksi)
+})

@@ -63,3 +63,4 @@ Route::match(['get', 'post'],'transaksi/pembayaran/transfer','TransaksiControlle
 Route::get('transaksi/status/{user_id}','TransaksiController@status')->name('status');
 
 Route::get('konfirmasi','AdminController@index')->name('konfirmasi');
+Route::match(['get', 'post'],'konfirmasi/sukses','AdminController@confirm')->name('conf');

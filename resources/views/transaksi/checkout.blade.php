@@ -32,11 +32,9 @@
 				<a class='btn btn-primary' href='/user_home/' role='button'>
 					Back
 				</a>
-				@foreach($hasil as $data)
 				<button type="button" class="btn btn-success" data-toggle="modal" data-target="#bayar">
 						Bayar
 				</button>
-				@endforeach
 	        </div>
 		</div>
 	</div>	
@@ -53,11 +51,13 @@
           			<span aria-hidden="true">&times;</span>
         		</button>
       	</div>
-      		@foreach($hasil as $data)
    			<form action="{{route('pembayaran')}}" method="post" enctype="multipart/form-data">
       		{{csrf_field()}}
       			<div class="modal-body">
+
+      				@foreach($hasil as $data)
       				<input type="hidden" name="id_booking" id="id_booking" value="{{$data->id_booking}}">
+      				@endforeach
       				<input type="hidden" name="id_user" id="id_user" value="{{Auth::user()->id}}">
 	        			<div class="form-group">
 							<label for="method">Metode Pembayaran</label>
@@ -86,7 +86,6 @@
 	        			<button type="submit" class="btn btn-primary">Save Changes</button>
       			</div>
     		</form>
-    		@endforeach
    	</div>
   	</div>
 </div>

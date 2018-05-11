@@ -93,7 +93,7 @@
     </main>
 
     <!-- Footer -->
-    <footer style="position: absolute; right: 0; bottom: 0; left: 0; padding: 1rem;">
+    <footer  class="navbar-fixed-bottom">
       <div class="container">
         <div class="row">
           <div class="col-md-4">

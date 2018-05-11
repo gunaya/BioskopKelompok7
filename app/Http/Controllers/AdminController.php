@@ -26,4 +26,38 @@ class AdminController extends Controller
     	//dd($konfirmasi);
     	return view('admin-film.konfirmasi', compact('konfirmasi'));
     }
+
+    public function confirm(Request $request)
+    {
+    	//dd($request);
+    	$confirm = Transaksi::where('id_transaksi',$request->get('id_transaksi'))
+                          ->update(['status' => 'lunas']);
+      $book_id = Transaksi::where('id_transaksi',$request->get('id_transaksi'))
+      						  ->select('id_booking')
+      						  ->first();
+
+      $id_book = $book_id->id_booking;
+      //dd($id_book);
+      
+      Booking::where('id_booking', $id_book)
+      		 ->update(['status' => 'lunas']);
+
+     	// //update kode unik di det booking
+      // $det = DetBooking::where('id_booking', $id_book)
+      // 		 ->select('id_det_booking')
+      // 		 ->get();
+
+      // $random = $id_book+date('Ymd')+time('His');
+      // $code = array();
+
+//       foreach ($det as $id => $data) {
+//       	$randomString = substr(str_shuffle($random), 0, 10);      	
+//       	array_push($code, 'unique_code' => $randomString);
+
+   	      
+//       }   dd($code)
+// DetBooking::where('id_booking', $id_book)
+// 	      		 ->update(['unique_code' => $code);
+      return back();
+    }
 }
