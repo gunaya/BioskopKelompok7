@@ -51,7 +51,7 @@
 							  	</td>
 							  	<td>
 							  		<button class="btn btn-danger" data-fid="{{$confirm->id_transaksi}}" data-toggle="modal" data-target="#confirm">
-							      		Delete
+							      		Confirm
 							      </button> 
 							  	</td>
 						    </tr>
@@ -121,17 +121,17 @@
 	</div>
 
 <!-- Modal Konfirmasi -->
-<div class="modal modal-danger fade" id="confirm" tabindex="-1" role="dialog" aria-labelledby="deleteModal">
+<div class="modal fade in" id="confirm" tabindex="-1" role="dialog" aria-labelledby="deleteModal">
 	  <div class="modal-dialog" role="document">
 	    <div class="modal-content">
 	      <div class="modal-header">
 	        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-	        <h4 class="text-center modal-title" id="deleteModal">Delete Confirmation</h4>
+	        <h4 class="text-center modal-title" id="deleteModal">Payment Confirmation</h4>
 	      </div>
 	      <form action="{{route('conf')}}" method="post">
 	      	{{csrf_field()}}
 	      	<div class="modal-body">
-	      		<p class="text-center">Yakin Ingin Menghapus genre ?</p>
+	      		<p class="text-center">Yakin Ingin Memverifikasi Pembayaran ?</p>
 	      		<input type="hidden" name="id_transaksi" id="id_transaksi" value="">
 	      	</div>
 	      	<div class="modal-footer">
