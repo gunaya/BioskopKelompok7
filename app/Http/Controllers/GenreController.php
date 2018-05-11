@@ -37,7 +37,7 @@ class GenreController extends Controller
     public function store(Request $request)
     {
         tb_genre_film::create($request->all());
-        dd($request->all());
+        //dd($request->all());
         return back();
     }
 

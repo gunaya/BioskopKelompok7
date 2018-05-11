@@ -165,7 +165,7 @@ class TransaksiController extends Controller
             ->WHERE('tb_booking.id_user',$id)
             ->where('tb_booking.status','belum_lunas')
             ->where('tb_det_booking.status','pending')
-            ->select('nama_film','harga','tb_booking.id_booking','tb_det_booking.status')
+            ->select('nama_film','harga','tb_booking.id_booking','tb_det_booking.status','id_det_booking')
             ->get();
 
         //dd($hasil->all());
@@ -182,7 +182,7 @@ class TransaksiController extends Controller
             ->WHERE('tb_booking.id_user',$user_id)
             ->where('tb_booking.status','belum_lunas')
             ->where('tb_det_booking.status','pending')
-            ->select('nama_film','harga','tb_booking.id_booking')
+            ->select('nama_film','harga','tb_booking.id_booking','id_det_booking')
             ->get();
 
         //dd($hasil->all());
@@ -304,5 +304,12 @@ class TransaksiController extends Controller
                                     ->first();
         }
         return view('transaksi.status',compact('hasil','method','status'));
+    }
+
+    public function cancel(Request $request)
+    {
+        $det_id = DetBooking::FindOrFail($request->id_det_booking);
+        $det_id->delete();
+        return back();
     }
 }

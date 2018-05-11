@@ -22,6 +22,11 @@
 								<td>{{$id+1}}</td>
 								<td>{{$data->nama_film}}</td>
 								<td>{{$data->harga}}</td>
+								<td style="text-align: center">
+									<button class="btn btn-danger" data-fid="{{$data->id_det_booking}}" data-toggle="modal" data-target="#cancelOrder">
+							      		Cancel Order
+							      	</button> 
+								</td>
 							</tr>
 						@endforeach
 					</tbody>
@@ -93,4 +98,27 @@
    	</div>
   	</div>
 </div>
+
+<!-- Cancel Order -->
+	<div class="modal fade" id="cancelOrder" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+	  <div class="modal-dialog" role="document">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	        <h4 class="text-center modal-title" id="deleteModal">Delete Confirmation</h4>
+	      </div>
+	      <form action="{{route('cancel')}}" method="post">
+	      	{{csrf_field()}}
+	      	<div class="modal-body">
+	      		<p class="text-center">Yakin Ingin Membatalkan Order ?</p>
+	      		<input type="hidden" name="id_det_booking" id="id_det_booking" value="">	        	
+	      	</div>
+	      	<div class="modal-footer">
+	        	<button type="button" class="btn btn-success" data-dismiss="modal">Cancel</button>
+	        	<button type="submit" class="btn btn-warning">Yes</button>
+	      	</div>
+	      </form>
+	    </div>
+	  </div>
+	</div>
 @endsection
