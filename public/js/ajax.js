@@ -36,3 +36,9 @@ $('#kursi').on('click',function(e){
         $('.modal-body').html('<i class="glyphicon glyphicon-info-sign"></i> Something went wrong, Please try again...');
     });
 });
+
+$('#cari').select2({
+    placeholder: "Select a Name",
+    allowClear: true
+
+});

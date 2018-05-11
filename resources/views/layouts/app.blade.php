@@ -25,6 +25,7 @@
 
     <!-- Custom styles for this template -->
     <link href="{{ asset('agency/css/agency.css')}}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('css/select2.min.css')}}">
 
   </head>
 
@@ -61,7 +62,7 @@
                 </li>
             @else
               <li class="nav-item">
-                  {{-- search --}}
+                  {{-- Search --}}
               </li>
               <li class="nav-item dropdown">
                   <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
@@ -139,6 +140,9 @@
     <!-- Plugin JavaScript -->
     <script src="{{asset('agency/vendor/jquery-easing/jquery.easing.min.js')}}"></script>
 
+    <!-- Autocomplete Search -->
+    <script src="{{asset('js/select2.min.js')}}"></script>
+
     <!-- Contact form JavaScript -->
     <script src="{{asset('agency/js/jqBootstrapValidation.js')}}"></script>
     <script src="{{asset('agency/js/contact_me.js')}}"></script>
@@ -151,6 +155,9 @@
 
     <!-- Edit Profile -->
     <script src="{{asset('js/editProfil.js')}}"></script>
+
+    <!-- Autocomplete Search -->
+    <script src="{{asset('js/select2.min.js')}}"></script>
 
   </body>
 

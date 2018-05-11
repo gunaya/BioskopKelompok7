@@ -52,7 +52,7 @@
 	      @endif
 				
 		@else
-			<strong><h3><p class="text-center">Tiket yang belum diverifikasi</p></h3></strong><br>
+			<strong><h3><p class="text-center">Status tiketmu</p></h3></strong><br>
 			<div class="box-body no-padding">
 				<table class="table">
 					<thead>
@@ -61,48 +61,31 @@
 						    <th>Judul Film</th>
 						    <th>Kode Kursi</th>
 						    <th>Waktu tayang</th>
+						    <th>Kode Unik</th>
 						    <th>Status</th>
 					    </tr>
 					</thead>
 					<tbody>
-						@foreach($hasilBelum as $id => $data)
-							<tr @if ($id === 0) class="active" @endif  style="text-align: center">
-								<td>{{$id+1}}</td>
-								<td>{{$data->nama_film}}</td>
-								<td>{{$data->kode_kursi}}</td>
-								<td>{{$data->waktu_tayang}}</td>
-								<td><button type="button" class="btn btn-secondary" disabled>Belum Terverifikasi</button></td>
-							</tr>
-						@endforeach
-					</tbody>
-				</table>
-			</div>
-			<br>
-			<br>
-			<br>
-			<strong><h3><p class="text-center">Tiket yang masih tersedia</p></h3></strong><br>
-			<div class="box-body no-padding">
-				<table class="table">
-					<thead>
-						<tr style="text-align: center" >
-						    <th>ID</th>
-						    <th>Judul Film</th>
-						    <th>Kode Kursi</th>
-						    <th>Waktu tayang</th>
-						    <th>Kode Unik</th>
-						    <th style="text-align: center">Status</th>
-					    </tr>
-					</thead>
-					<tbody>
-						@foreach($hasilLunas as $id => $data)
-							<tr @if ($id === 0) class="active" @endif  style="text-align: center">
-								<td>{{$id+1}}</td>
-								<td>{{$data->nama_film}}</td>
-								<td>{{$data->kode_kursi}}</td>
-								<td>{{$data->waktu_tayang}}</td>
-								<td>{{$data->unique_code}}</td>
-								<td><button type="button" class="btn btn-primary" disabled>Terverifikasi</button></td>
-							</tr>
+						@foreach($hasil as $id => $data)
+							@if($data->status == 'belum_lunas')
+								<tr @if ($id === 0) class="active" @endif  style="text-align: center">
+									<td>{{$id+1}}</td>
+									<td>{{$data->nama_film}}</td>
+									<td>{{$data->kode_kursi}}</td>
+									<td>{{$data->waktu_tayang}}</td>
+									<td>***********</td>
+									<td><button type="button" class="btn btn-secondary" disabled>Belum Terverifikasi</button></td>
+								</tr>
+							@else
+								<tr @if ($id === 0) class="active" @endif  style="text-align: center">
+									<td>{{$id+1}}</td>
+									<td>{{$data->nama_film}}</td>
+									<td>{{$data->kode_kursi}}</td>
+									<td>{{$data->waktu_tayang}}</td>
+									<td>{{$data->unique_code}}</td>
+									<td><button type="button" class="btn btn-primary" disabled>Terverifikasi</button></td>
+								</tr>
+							@endif
 						@endforeach
 					</tbody>
 				</table>

@@ -7,8 +7,8 @@
 			<div class="box-header">
 			  <h3 class="box-title">Konfirmasi</h3>
 			</div>
-			<div class="box-body table-responsive no-padding">
-			  	<table class="table table-responsive">
+			<div class="box-body no-padding">
+			  	<table class="table">
 				  	<thead>
 					    <tr>
 					      <th style="text-align: center">No. </th>

@@ -275,27 +275,17 @@ class TransaksiController extends Controller
     public function status($user_id)
     {  
 
-        $hasilBelum = Booking::join('tb_det_booking', 'tb_det_booking.id_booking','=','tb_booking.id_booking')
+        $hasil = Booking::join('tb_det_booking', 'tb_det_booking.id_booking','=','tb_booking.id_booking')
             ->leftJoin('tb_list_kursi','tb_det_booking.id_list_kursi','=','tb_list_kursi.id_list_kursi')
             ->leftJoin('tb_tayang','tb_list_kursi.id_tayang','=','tb_tayang.id_tayang')
             ->leftJoin('tb_kursi','tb_list_kursi.id_kursi','=','tb_kursi.id_kursi')
             ->leftJoin('tb_film','tb_tayang.id_film','=','tb_film.id_film')
             ->WHERE('tb_booking.id_user',$user_id)
-            ->where('tb_booking.status','belum_lunas')
             ->where('tb_tayang.waktu_tayang','>',date("Y-m-d"))
-            ->select('nama_film','tb_kursi.kode_kursi','tb_booking.batas_transaksi','unique_code','tb_tayang.waktu_tayang','tb_booking.status')
+            ->select('nama_film','tb_kursi.kode_kursi','tb_booking.id_booking','tb_booking.batas_transaksi','unique_code','tb_tayang.waktu_tayang','tb_booking.status')
+            ->orderBy('tb_tayang.waktu_tayang','asc')
             ->get();
-
-        $hasilLunas = Booking::join('tb_det_booking', 'tb_det_booking.id_booking','=','tb_booking.id_booking')
-            ->leftJoin('tb_list_kursi','tb_det_booking.id_list_kursi','=','tb_list_kursi.id_list_kursi')
-            ->leftJoin('tb_tayang','tb_list_kursi.id_tayang','=','tb_tayang.id_tayang')
-            ->leftJoin('tb_kursi','tb_list_kursi.id_kursi','=','tb_kursi.id_kursi')
-            ->leftJoin('tb_film','tb_tayang.id_film','=','tb_film.id_film')
-            ->WHERE('tb_booking.id_user',$user_id)
-            ->where('tb_booking.status','lunas')
-            ->where('tb_tayang.waktu_tayang','>',date("Y-m-d"))
-            ->select('nama_film','tb_kursi.kode_kursi','tb_booking.batas_transaksi','unique_code','tb_tayang.waktu_tayang','tb_booking.status')
-            ->get();
+        //dd($hasilBelum);
 
         $trans = Transaksi::where('tb_transaksi.id_user', $user_id)
             ->select('id_transaksi','method')
@@ -313,6 +303,6 @@ class TransaksiController extends Controller
                                     ->orderBy('created_at','desc')
                                     ->first();
         }
-        return view('transaksi.status',compact('hasilBelum','hasilLunas','method','status'));
+        return view('transaksi.status',compact('hasil','method','status'));
     }
 }

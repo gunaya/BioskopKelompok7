@@ -3,8 +3,8 @@
 @section('content')
 	<div class="container" style="margin-top: 70px">
 		<div class="box">
-			<div class="box-header">
-				<h3>Hello World</h3>
+			<div class="box-header" style="margin-bottom: 20px;">
+				<h4><em>Ayo, segera selesaikan transaksimu !</em></h4>
 			</div>
 			<div class="box-body no-padding">
 				<table class="table">
@@ -27,14 +27,18 @@
 					</tbody>
 				</table>
 			</div>
-			<div class="box-footer clearfix">
-				<!-- Tambah Film -->
+			<div class="box-footer clearfix row">
+				@if(empty($id))
+					<p class="ml-auto mr-auto" style="margin-bottom: 330px"><em>Kamu tidak memiliki transaksi apapun</em></p>
+				@else
+
 				<a class='btn btn-primary' href='/user_home/' role='button'>
 					Back
 				</a>
-				<button type="button" class="btn btn-success" data-toggle="modal" data-target="#bayar">
+				<button type="button" class="btn btn-success ml-auto" data-toggle="modal" data-target="#bayar">
 						Bayar
 				</button>
+				@endif
 	        </div>
 		</div>
 	</div>	

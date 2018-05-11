@@ -160,4 +160,11 @@ class FilmController extends Controller
 
         return view('admin-film.result', compact('hasil', 'query'));
     }
+
+    public function loadData(Request $request)
+    {
+        $film = DB::table('tb_film')->get();
+
+        return view('/user_home',compact('film'));
+    }
 }

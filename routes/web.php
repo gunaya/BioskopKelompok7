@@ -40,6 +40,7 @@ Route::get('/tayang','TayangController@show');
 
 // Search Route
 Route::get('query','FilmController@search');
+Route::get('user_home/cari', 'FilmController@loadData');
 Route::get('queryKat','KategoriController@search');
 Route::get('queryGen','GenreController@search');
 
@@ -64,3 +65,5 @@ Route::get('transaksi/status/{user_id}','TransaksiController@status')->name('sta
 
 Route::get('konfirmasi','AdminController@index')->name('konfirmasi');
 Route::match(['get', 'post'],'konfirmasi/sukses','AdminController@confirm')->name('conf');
+
+
