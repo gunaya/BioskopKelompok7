@@ -22,6 +22,7 @@ class AdminController extends Controller
     						-> leftJoin('method_trans_kartu_kredit','method_trans_kartu_kredit.id_transaksi','=','tb_transaksi.id_transaksi')
     						-> where('tb_transaksi.status',"dibayar")
     						-> select('tb_transaksi.id_transaksi','users.name','tb_transaksi.waktu_transaksi','tb_booking.total_pembayaran','tb_transaksi.status','tb_transaksi.method','bank','bukti_pembayaran','method_trans_trf_bank.atas_nama as nama_trf','method_trans_kartu_kredit.atas_nama as nama_kredit','no_kartu_kredit')
+                -> groupBy('tb_transaksi.id_transaksi')
     						-> get();
     	//dd($konfirmasi);
     	return view('admin-film.konfirmasi', compact('konfirmasi'));
@@ -32,32 +33,15 @@ class AdminController extends Controller
     	//dd($request);
     	$confirm = Transaksi::where('id_transaksi',$request->get('id_transaksi'))
                           ->update(['status' => 'lunas']);
-      $book_id = Transaksi::where('id_transaksi',$request->get('id_transaksi'))
-      						  ->select('id_booking')
-      						  ->first();
 
-      $id_book = $book_id->id_booking;
+      $book = Transaksi::where('id_transaksi',$request->get('id_transaksi'))
+                    ->select('id_booking')
+                    ->first();
+      $id_book = $book->id_booking;
       //dd($id_book);
       
       Booking::where('id_booking', $id_book)
-      		 ->update(['status' => 'lunas']);
-
-     	// //update kode unik di det booking
-      // $det = DetBooking::where('id_booking', $id_book)
-      // 		 ->select('id_det_booking')
-      // 		 ->get();
-
-      // $random = $id_book+date('Ymd')+time('His');
-      // $code = array();
-
-//       foreach ($det as $id => $data) {
-//       	$randomString = substr(str_shuffle($random), 0, 10);      	
-//       	array_push($code, 'unique_code' => $randomString);
-
-   	      
-//       }   dd($code)
-// DetBooking::where('id_booking', $id_book)
-// 	      		 ->update(['unique_code' => $code);
+           ->update(['status' => 'lunas']);
       return back();
     }
 }

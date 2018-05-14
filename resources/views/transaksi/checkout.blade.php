@@ -33,7 +33,7 @@
 				</table>
 			</div>
 			<div class="box-footer clearfix row">
-				@if(empty($id))
+				@if(empty($data))
 					<p class="ml-auto mr-auto" style="margin-bottom: 330px"><em>Kamu tidak memiliki transaksi apapun</em></p>
 				@else
 

@@ -30,7 +30,7 @@ class HomeController extends Controller
 
     public function home(Request $request)
     {
-        dd($request->all());
+        //dd($request->all());
         if(Auth::attempt(['email' => $request->email, 'password'=>$request->password]))
         {
             $user = User::where('email',$request->email)->first();

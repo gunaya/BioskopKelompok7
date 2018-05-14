@@ -215,6 +215,9 @@ class TransaksiController extends Controller
                         'id_user' => $request->get('id_user')
             ]);
 
+            Booking::where('id_booking', $book_id)
+                      ->update(['status' => 'dibayar']);
+
             DetBooking::where('id_booking',$book_id)
                       ->update(['status' => 'deal']);
                       
@@ -226,6 +229,9 @@ class TransaksiController extends Controller
                         'id_user' => $request->get('id_user')
             ]);
 
+            Booking::where('id_booking', $book_id)
+                      ->update(['status' => 'dibayar']);
+
             DetBooking::where('id_booking',$book_id)
                       ->update(['status' => 'deal']);
                       
@@ -233,6 +239,10 @@ class TransaksiController extends Controller
             $transaksi = Transaksi::where('id_booking',$book_id)
                         ->select('id_transaksi','method')
                         ->first();
+                        
+
+            Booking::where('id_booking', $book_id)
+                      ->update(['status' => 'dibayar']);
 
             DetBooking::where('id_booking',$book_id)
                       ->update(['status' => 'deal']);
@@ -243,11 +253,17 @@ class TransaksiController extends Controller
 
     public function kredit(Request $request)
     {
+
+        $id = $request->get('id_transaksi');
+
         KreditMethod::create([
             'no_kartu_kredit' => $request->get('no_kartu_kredit'),
             'atas_nama' => $request->get('atas_nama'),
-            'id_transaksi' => $request->get('id_transaksi')
+            'id_transaksi' => $id
         ]);
+
+        Transaksi::where('id_transaksi', $id)
+                -> update(['status' => 'dibayar']);
 
         $user_id = $request->get('id_user');
         return $this->status($user_id);
@@ -256,8 +272,9 @@ class TransaksiController extends Controller
     public function transfer(Request $request)
     {
         //dd($request->all());
+        $id = $request->get('id_transaksi');
         $image = $request->file('bukti_pembayaran');
-        $filename = $request->get('id_transaksi'). "_" . date('m-d-Y', time()) . '.' . $image->getClientOriginalExtension();
+        $filename = $request->get('id_transaksi') . $request->get('nomor_rekening') . "_" . date('m-d-Y', time()) . '.' . $image->getClientOriginalExtension();
         $image->move('upload\bukti_trf', $filename, file_get_contents($image->getRealPath()));
 
         $trf = new TransferMethod;
@@ -269,6 +286,10 @@ class TransaksiController extends Controller
         $trf->save();
 
         $user_id = $request->get('id_user');
+
+        Transaksi::where('id_transaksi', $id)
+                -> update(['status' => 'dibayar']);
+
         return $this->status($user_id);
     }
 
@@ -303,7 +324,7 @@ class TransaksiController extends Controller
                                     ->orderBy('created_at','desc')
                                     ->first();
         }
-        return view('transaksi.status',compact('hasil','method','status'));
+        return view('transaksi.status',compact('hasil','method','trans'));
     }
 
     public function cancel(Request $request)

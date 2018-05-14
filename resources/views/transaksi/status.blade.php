@@ -67,7 +67,7 @@
 					</thead>
 					<tbody>
 						@foreach($hasil as $id => $data)
-							@if($data->status == 'belum_lunas')
+							@if($data->status == 'belum_lunas' || $data->status == 'dibayar')
 								<tr @if ($id === 0) class="active" @endif  style="text-align: center">
 									<td>{{$id+1}}</td>
 									<td>{{$data->nama_film}}</td>

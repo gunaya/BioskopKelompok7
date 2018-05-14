@@ -18,5 +18,10 @@ class LoginController extends Controller
             }
             return redirect()->route('user_home');
         }
+
+        else 
+        {
+            return view('auth.login');
+        }
     }
 }
