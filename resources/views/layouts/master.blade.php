@@ -156,14 +156,14 @@ desired effect
         </li>
         <li><a href="{{route('konfirmasi')}}"><i class="fa fa-link"></i> <span>Konfirmasi</span></a></li>
         <li class="treeview">
-          <a href="#"><i class="fa fa-link"></i> <span>Lorem</span>
+          <a href="#"><i class="fa fa-link"></i> <span>Kelola Penayangan</span>
             <span class="pull-right-container">
                 <i class="fa fa-angle-left pull-right"></i>
               </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="#">Lorem level 2</a></li>
-            <li><a href="#">Lorem level 2</a></li>
+            <li><a href="{{url('admin-film/penayangan/jadwal')}}">Jadwal Penayangan</a></li>
+            <li><a href="{{url('admin-film/penayangan/edit_kursi')}}">Kelola Kursi</a></li>
           </ul>
         </li>
       </ul>

@@ -69,4 +69,15 @@ Route::match(['get', 'post'],'konfirmasi/sukses','AdminController@confirm')->nam
 
 Route::match(['get', 'post'],'transaksi/cancel','TransaksiController@cancel')->name('cancel');
 
+Route::get('admin-film/penayangan/jadwal','PenayanganController@penayangan');
+Route::post('admin-film/penayangan/jadwal/simpan','PenayanganController@simpan_jadwal')->name('simpan_jadwal');
+
+// Route::get('admin-film/penayangan/list_kursi','PenayanganController@list_kursi');
+Route::post('admin-film/penayangan/list_kursi/tambah','PenayanganController@simpan_list')->name('simpan_list');
+
+Route::get('/admin-film/penayangan/jadwal/{id_tayang}','PenayanganController@list_kursi');
+
+Route::get('admin-film/penayangan/edit_kursi','PenayanganController@kursi');
+Route::post('admin-film/penayangan/edit_kursi/tambah','PenayanganController@simpan_kursi')->name('simpan_kursi');
+
 

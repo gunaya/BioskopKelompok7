@@ -38,6 +38,12 @@ $(function () {
     })
 })
 
+$(function () {
+    $('.datetimepicker2').datetimepicker({
+    	format: 'YYYY-MM-DD H:s'
+    })
+})
+
 $('#detailTrf').on('show.bs.modal', function (event){
 	console.log('Modal Opened');
 
@@ -75,3 +81,13 @@ $('#confirm').on('show.bs.modal', function (event) {
 	var modal = $(this)
 	modal.find('.modal-body #id_transaksi').val(id_transaksi)
 })
+
+$('#tambahList').on('show.bs.modal', function (event) {
+	console.log('Modal Opened');
+	var button = $(event.relatedTarget) // Button that triggered the modal
+	var id_tayang = button.data('id') 
+
+	var modal = $(this)
+	modal.find('.modal-body #id_tayang').val(id_tayang)
+})
+
