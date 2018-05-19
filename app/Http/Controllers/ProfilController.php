@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\User;
+use App\DetBooking;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -16,7 +17,17 @@ class ProfilController extends Controller
     public function index($user_id)
     {
         $hasil = User::where('id', $user_id)->get();
-        return view('profile.index',compact('hasil'));
+        $history = DetBooking::join('tb_booking','tb_det_booking.id_booking','=','tb_booking.id_booking')
+                            -> join('tb_transaksi','tb_transaksi.id_booking','=','tb_booking.id_booking')
+                            -> join('tb_list_kursi','tb_det_booking.id_list_kursi','=','tb_list_kursi.id_list_kursi')
+                            -> join('tb_kursi','tb_list_kursi.id_kursi','=','tb_kursi.id_kursi')
+                            -> join('tb_tayang','tb_list_kursi.id_tayang','=','tb_tayang.id_tayang')
+                            -> join('tb_film','tb_tayang.id_film','=','tb_film.id_film')
+                            -> where('tb_transaksi.id_user',$user_id)
+                            -> select('tb_film.nama_film','kode_kursi','waktu_transaksi','tb_booking.status')
+                            -> get();
+        //dd($history->all());
+        return view('profile.index',compact('hasil','history'));
     }
 
     /**

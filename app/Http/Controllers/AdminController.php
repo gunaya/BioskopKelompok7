@@ -9,6 +9,8 @@ use App\ListKursi;
 use App\Tayang;
 use App\TransferMethod;
 use App\KreditMethod;
+use App\User;
+use App\Film;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -25,12 +27,13 @@ class AdminController extends Controller
                 -> groupBy('tb_transaksi.id_transaksi')
     						-> get();
     	//dd($konfirmasi);
+
+      
     	return view('admin-film.konfirmasi', compact('konfirmasi'));
     }
 
     public function confirm(Request $request)
-    {
-    	//dd($request);
+    {  
     	$confirm = Transaksi::where('id_transaksi',$request->get('id_transaksi'))
                           ->update(['status' => 'lunas']);
 
@@ -43,5 +46,18 @@ class AdminController extends Controller
       Booking::where('id_booking', $id_book)
            ->update(['status' => 'lunas']);
       return back();
+    }
+
+    public function loadData()
+    {
+      $transaksi = Transaksi::count();
+      $member = User::where('admin',0)
+                    ->count();
+      $film = Film::count();
+      $booking = Transaksi::where('status','dibayar')
+                        ->count();
+
+      //dd($booking); 
+      return view ('admin_home',compact('transaksi','member','film','booking'));
     }
 }

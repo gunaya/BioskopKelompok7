@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container" style="margin-top: 70px">
-	<div class="box" style="margin-left: 200px; margin-right:200px;">
+	<div class="box" id="profil" style="margin-left: 200px; margin-right:200px;">
 
 		<div class="box-body no-padding">
 		@foreach($hasil as $data)
@@ -56,7 +56,36 @@
 				</div>
 			</div>
 		</div>
-
+	</div>
+	<br>
+	<hr align="center" width="100%" >
+	<br>
+	<div class="box tabcontent" id="history">
+		<strong><em><h3><p class="text-center">Hostory Pembelian Tiket</p></h3></em></strong>
+		<div class="box-body">
+			<table class="table">
+					<thead>
+						<tr style="text-align: center">
+						    <th>No</th>
+						    <th>Judul Film</th>
+						    <th>Kode Kursi</th>
+						    <th>Waktu Pembelian</th>
+						    <th>Status</th>
+					    </tr>
+					</thead>
+					<tbody>
+						@foreach($history as $id => $data)
+							<tr @if ($id === 0) class="active" @endif  style="text-align: center">
+								<td>{{$id+1}}</td>
+								<td>{{$data->nama_film}}</td>
+								<td>{{$data->kode_kursi}}</td>
+								<td>{{$data->waktu_transaksi}}</td>
+								<td>{{$data->status}}</td>
+							</tr>
+						@endforeach
+					</tbody>
+				</table>
+		</div>
 	</div>
 </div>
 

@@ -34,7 +34,11 @@
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-dark fixed-top navbar-shrink" id="mainNav">
       <div class="container">
-        <a class="navbar-brand js-scroll-trigger" href="{{ url('/') }}">Cinemine</a>
+        @if(Auth::user()->admin == 1)
+          <a class="navbar-brand js-scroll-trigger" href="{{ url('/admin_home') }}">Cinemine</a>
+        @else
+          <a class="navbar-brand js-scroll-trigger" href="{{ url('/user_home') }}">Cinemine</a>
+        @endif
         <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
           Menu
           <i class="fa fa-bars"></i>
@@ -63,6 +67,14 @@
             @else
               <li class="nav-item">
                   {{-- Search --}}
+                  <form action="{{ url('user_home/search')}}" method="GET">
+                    <div class="input-group input-group-sm" style="width: 250px; margin-top: 5px;">
+                      <input type="text" name="q" id="q" class="form-control pull-right" placeholder="Search">
+                      <div class="input-group-btn">
+                        <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
+                      </div>
+                    </div>
+                  </form>
               </li>
               <li class="nav-item dropdown">
                   <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>

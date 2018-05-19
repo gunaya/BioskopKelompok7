@@ -34,7 +34,7 @@
 	            <button type="submit" class="btn btn-primary">Konfirmasi</button>
 	            </form>
 	         </div>
-	      @else
+	      	@else
 	         <form action="{{route('success_kredit')}}" method="post" enctype="multipart/form-data">
 	         {{csrf_field()}}
 	            <input type="hidden" name="id_transaksi" id="id_transaksi" value="{{$trans->id_transaksi}}">

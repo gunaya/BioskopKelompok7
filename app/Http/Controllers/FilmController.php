@@ -167,4 +167,12 @@ class FilmController extends Controller
 
         return view('/user_home',compact('film'));
     }
+
+    public function userSearch(Request $request)
+    {
+        $query = $request->get('q');
+        $film = Film::where('nama_film', 'LIKE', '%' . $query . '%')->paginate(7);
+
+        return view('user_home', compact('film', 'query'));
+    }
 }

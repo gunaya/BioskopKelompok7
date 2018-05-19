@@ -1,14 +1,14 @@
 @extends('layouts.master')
 
 @section('content')
-	<div class="container">
+	<div class="">
 		
 		<div class="box">
 			<div class="box-header">
 			  <h3 class="box-title">Konfirmasi</h3>
 			</div>
-			<div class="box-body no-padding">
-			  	<table class="table">
+			<div class="box-body table-responsive no-padding">
+			  	<table class="table table-responsive">
 				  	<thead>
 					    <tr>
 					      <th style="text-align: center">No. </th>
