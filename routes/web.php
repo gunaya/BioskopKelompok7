@@ -78,4 +78,4 @@ Route::post('admin-film/penayangan/edit_kursi/tambah','PenayanganController@simp
 //Route Untuk Konfirmasi Pembelian User pada Menu Admin
 Route::get('konfirmasi','AdminController@index')->name('konfirmasi');
 Route::match(['get', 'post'],'konfirmasi/sukses','AdminController@confirm')->name('conf');
-Route::get('admin_home','AdminController@loadData'); //Search
+Route::get('admin_home','AdminController@loadData')->name('admin_home'); //Search

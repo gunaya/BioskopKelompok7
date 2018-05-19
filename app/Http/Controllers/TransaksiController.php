@@ -312,18 +312,23 @@ class TransaksiController extends Controller
             ->select('id_transaksi','method')
             ->orderBy('created_at','desc')
             ->first();
-
-        if ($trans->method == 'transfer') {
+        if (empty($trans)) {
+            $method = 'null';
+        } else {
+            if ($trans->method == 'transfer') {
             $method = TransferMethod::where('id_transaksi',$trans->id_transaksi)
                                     ->select('id_trf_bank as id')
                                     ->orderBy('created_at','desc')
                                     ->first();
-        } else {
-            $method = KreditMethod::where('id_transaksi',$trans->id_transaksi)
-                                    ->select('id_kartu_kredit as id')
-                                    ->orderBy('created_at','desc')
-                                    ->first();
+            } else {
+                $method = KreditMethod::where('id_transaksi',$trans->id_transaksi)
+                                        ->select('id_kartu_kredit as id')
+                                        ->orderBy('created_at','desc')
+                                        ->first();
+            }
         }
+        
+        
         return view('transaksi.status',compact('hasil','method','trans'));
     }
 
