@@ -23,7 +23,7 @@ class AdminController extends Controller
     						-> leftJoin('method_trans_trf_bank','method_trans_trf_bank.id_transaksi','=','tb_transaksi.id_transaksi')
     						-> leftJoin('method_trans_kartu_kredit','method_trans_kartu_kredit.id_transaksi','=','tb_transaksi.id_transaksi')
     						-> where('tb_transaksi.status',"dibayar")
-    						-> select('tb_transaksi.id_transaksi','users.name','tb_transaksi.waktu_transaksi','tb_booking.total_pembayaran','tb_transaksi.status','tb_transaksi.method','bank','bukti_pembayaran','method_trans_trf_bank.atas_nama as nama_trf','method_trans_kartu_kredit.atas_nama as nama_kredit','no_kartu_kredit')
+    						-> select('tb_transaksi.id_transaksi','users.name','tb_transaksi.waktu_transaksi','tb_booking.total_pembayaran','tb_transaksi.status','tb_transaksi.method','bank','bukti_pembayaran','method_trans_trf_bank.atas_nama as nama_trf','method_trans_kartu_kredit.atas_nama as nama_kredit','no_kartu_kredit', 'nomor_rekening')
                 -> groupBy('tb_transaksi.id_transaksi')
     						-> get();
     	//dd($konfirmasi);
