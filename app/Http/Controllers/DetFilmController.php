@@ -2,6 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use DateTime;
+use DateTimeZone;
+use DateInterval;
+
 use App\Film;
 use App\Tayang;
 use App\ListKursi;
@@ -19,9 +23,14 @@ class DetFilmController extends Controller
     {
         //$query = $request->get('film_id');
         $hasil = Film::where('id_film', $film_id)->get();
-        $tayang = Tayang::where('id_film', $film_id)->get();
+        $tayang = Tayang::where('id_film', $film_id)
+                        ->get();
+        $date = new DateTime();
+        $date->setTimeZone(new DateTimeZone('Asia/Hong_Kong'));
+
+        $date_now = $date->format('Y-m-d H:i:s');
         //dd($hasil->all());
-        return view('film.index',compact('hasil','tayang'));
+        return view('film.index',compact('hasil','tayang','date_now'));
     }
 
     /**
@@ -93,11 +102,11 @@ class DetFilmController extends Controller
     public function kursi()
     {
             $id = $_GET['id'];
-            $hasil = ListKursi::where('id_tayang', $id)->get();
+            $hasil = ListKursi::leftJoin('tb_kursi','tb_list_kursi.id_kursi','=','tb_kursi.id_kursi')
+                            ->where('id_tayang', $id)
+                            ->get();
             //dd($data->all());
 
-            return $hasil;
-        
-        
+            return $hasil;    
     }
 }

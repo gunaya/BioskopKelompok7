@@ -274,7 +274,7 @@ class TransaksiController extends Controller
         //dd($request->all());
         $id = $request->get('id_transaksi');
         $image = $request->file('bukti_pembayaran');
-        $filename = $request->get('id_transaksi') . $request->get('nomor_rekening') . "_" . date('m-d-Y', time()) . '.' . $image->getClientOriginalExtension();
+        $filename = $request->get('id_transaksi') . $request->get('atas_nama') . "_" . date('m-d-Y', time()) . '.' . $image->getClientOriginalExtension();
         $image->move('upload\bukti_trf', $filename, file_get_contents($image->getRealPath()));
 
         $trf = new TransferMethod;

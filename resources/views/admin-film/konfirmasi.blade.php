@@ -85,7 +85,7 @@
 					</div>
 		        	<div class="form-group">
 						<label for="bukti">Bukti Pembayaran</label><br>
-						<img class="mx-auto rounded-circle img-fluid img-thumbnail" src="{{asset('upload/profile/')}}" style="max-width: 250px; height: auto;" id="bukti" name="bukti">
+						<img class="mx-auto rounded-circle img-fluid img-thumbnail" src="{{asset('upload/bukti_trf/')}}" style="max-width: 250px; height: auto;" id="bukti" name="bukti">
 					</div>
 	      	</div>
 	      	<div class="modal-footer">

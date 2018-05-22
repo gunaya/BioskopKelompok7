@@ -2,21 +2,11 @@
 
 @section('content')
 
-{{-- 		@foreach($hasil as $listFilm)
-			<div class="col-md-4 col-sm-6 portfolio-item">
-		          	<img class="img-fluid" src="{{asset('upload/images/'.$listFilm->image) }}" alt="" style="width: 100%; height: 200px;">
-		        <div class="portfolio-caption">
-		          	<h4>{{($listFilm->nama_film)}}</h4>
-		          	<br>
-		        </div>
-		    </div>
-		    @endforeach 		--}}
-
 <div class="container" style="margin-top: 70px">
 	<div class="box" style="margin-left: 100px; margin-right:100px;">
 		<div class="box-body">
 		@foreach($hasil as $data)
-			<table class="table">
+			<table class="table borderless">
 				<tbody>
 					<tr>
 						<th scope="row" rowspan="6"><img class="img-fluid img-thumbnail rounded float-left" src="{{asset('upload/images/'.$data->image) }}" alt="" style="width: 300px; height: 300px;"></th>
@@ -50,18 +40,39 @@
 			</table>
 		@endforeach
 		</div>
-	    <br>
-	    <br>
 	    <div class="container">
-	    	<h3 class="text-center"><em>Jadwal Tayang</em></h3>
-		    <div class="row">
-		    	@foreach($tayang as $jadwal)
-		    		<div class="col-xs-4 ml-auto mr-auto">
-			    		<button type="submit" class="btn btn-primary" id="kursi" data-toggle="modal" data-target="#jadwal_tayang" data-id="{{$jadwal->id_tayang}}" style="margin-bottom: 20px">{{$jadwal->waktu_tayang}}</button>
-		    		</div>
-		    		&emsp;
-			    @endforeach
-		    </div>
+	    	<div class="row">
+	    		<div class="col-6">
+	    			<h3 class="text-center"><em>Jadwal Tayang</em></h3>
+	    			<div class="row">
+	    			@foreach($tayang as $jadwal)
+	    				@if($jadwal->waktu_tayang < $date_now)
+
+	    				@else
+				    		<div class="col-sm-4 ml-auto mr-auto">
+					    		<button type="submit" class="btn btn-primary kursi" data-toggle="modal" data-target="#jadwal_tayang" data-id="{{$jadwal->id_tayang}}" style="margin-bottom: 20px">{{$jadwal->waktu_tayang}}</button>
+				    		</div>
+				    		&emsp;
+						@endif
+	    			@endforeach
+	    			</div>
+
+	    		</div>
+	    		<div class="col-6">
+	    		@foreach($hasil as $data)
+	    			<table class="table borderless" style="margin-left: 35px">
+	    				<tbody>
+		    				<tr>
+		    					<td width="160px">Sinopsis</td>
+		    					<td width="50px">:</td>
+		    					<td>{{$data->sinopsis}}</td>
+		    				</tr>
+	    				</tbody>
+	    			</table>
+	    		@endforeach
+	    		</div>
+	    	</div>
+	    	
 	    </div>
 	</div>
 </div>
@@ -82,4 +93,10 @@
 	    </div>
 	  </div>
 	</div>
+
+<style type="text/css">
+.borderless td, .borderless th {
+    border: none;
+}
+</style>
 @endsection

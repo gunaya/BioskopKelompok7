@@ -80,7 +80,7 @@
 	      			<label>Bank yang Tersedia :</label>
 	      			<div class="row form-group">
 	      				<div class="col-xs-4 ml-auto mr-auto">
-	      					<p>Bank BNI</p>
+	      					<img src="{{asset('bni.png')}}">
 	      				</div>
 	      				<div class="col-xs-4 ml-auto mr-auto">
 	      					<p>Bank BRI</p>
