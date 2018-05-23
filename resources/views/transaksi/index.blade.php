@@ -2,7 +2,6 @@
 
 @section('content')
 	<div class="container" style="margin-top: 70px">
-		<h3>Hello World</h3>
 		@foreach($hasil as $data)
 			<form role="form" action="{{route('booking')}}" method="post">
 			{{csrf_field()}}
