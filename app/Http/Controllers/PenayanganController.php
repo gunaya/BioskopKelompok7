@@ -67,4 +67,16 @@ class PenayanganController extends Controller
     	$tayang = Tayang::all();
     	return view('admin-film/penayangan/list',compact('hasil','kursi','tayang'));
     }
+
+    public function lihat_studio()
+    {
+        $hasil = Studio::paginate(7);
+        return view('admin-film/penayangan/studio',compact('hasil'));
+    }
+
+    public function simpan_studio(Request $request)
+    {
+        Studio::create($request->all());
+        return back();
+    }
 }

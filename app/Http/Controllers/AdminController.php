@@ -60,4 +60,20 @@ class AdminController extends Controller
       //dd($booking); 
       return view ('admin_home',compact('transaksi','member','film','booking'));
     }
+
+    public function member()
+    {
+      $hasil = User::paginate(7);
+      //dd($hasil->all());
+      return view('admin-film/member',compact('hasil'));
+    }
+
+    public function transaksi()
+    {
+      $hasil = Transaksi::join('users','tb_transaksi.id_user','=','users.id')
+                        ->select('id_transaksi','waktu_transaksi','name','tb_transaksi.status')
+                        ->paginate(7);
+
+      return view('admin-film/transaksi', compact('hasil'));
+    }
 }

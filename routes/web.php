@@ -74,8 +74,14 @@ Route::post('admin-film/penayangan/list_kursi/tambah','PenayanganController@simp
 Route::get('/admin-film/penayangan/jadwal/{id_tayang}','PenayanganController@list_kursi');
 Route::get('admin-film/penayangan/edit_kursi','PenayanganController@kursi');
 Route::post('admin-film/penayangan/edit_kursi/tambah','PenayanganController@simpan_kursi')->name('simpan_kursi');
+Route::get('admin-film/penayangan/studio','PenayanganController@lihat_studio');
+Route::post('admin-film/penayangan/studio/simpan','PenayanganController@simpan_studio')->name('simpan_studio');
 
 //Route Untuk Konfirmasi Pembelian User pada Menu Admin
 Route::get('konfirmasi','AdminController@index')->name('konfirmasi');
 Route::match(['get', 'post'],'konfirmasi/sukses','AdminController@confirm')->name('conf');
 Route::get('admin_home','AdminController@loadData')->name('admin_home'); //Search
+
+//Route tambahan untuk dashboard admin
+Route::get('admin/member','AdminController@member');
+Route::get('admin/transaksi','AdminController@transaksi');

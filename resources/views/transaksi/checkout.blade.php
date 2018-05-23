@@ -80,13 +80,19 @@
 	      			<label>Bank yang Tersedia :</label>
 	      			<div class="row form-group">
 	      				<div class="col-xs-4 ml-auto mr-auto">
-	      					<img src="{{asset('bni.png')}}">
+	      					<img src="{{asset('bni.png')}}" class="rounded ml-auto mr-auto" style="width: 80px; height: 40px"><br>
+	      					<p class="text-center">Cindy <br> 
+	      					xxxx.xxxx.xxxx</p>
 	      				</div>
 	      				<div class="col-xs-4 ml-auto mr-auto">
-	      					<p>Bank BRI</p>
+	      					<img src="{{asset('bri.jpg')}}" class="rounded ml-auto mr-auto" style="width: 80px; height: 40px"> <br>
+	      					<p class="text-center">Cindy <br> 
+	      					xxxx.xxxx.xxxx</p>
 	      				</div>
 	      				<div class="col-xs-4 ml-auto mr-auto">
-	      					<p>Bank BCA</p>
+	      					<img src="{{asset('bca.png')}}" class="rounded ml-auto mr-auto" style="width: 80px; height: 40px"> <br>
+	      					<p class="text-center">Cindy <br> 
+	      					xxxx.xxxx.xxxx</p>
 	      				</div>
 	      			</div>
       			</div>

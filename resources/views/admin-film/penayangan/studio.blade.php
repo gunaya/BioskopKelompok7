@@ -4,7 +4,7 @@
 	<div class="">
 	  <div class="box">
 			<div class="box-header">
-			  <h3 class="box-title">Jadwal Tayang Film</h3>
+			  <h3 class="box-title">List Kursi</h3>
 				<div class="box-tools">
 
 			  	  {{-- <form action="{{ url('query')}}" method="GET">
@@ -26,14 +26,14 @@
 				  	<thead>
 					    <tr>
 					      <th>ID</th>
-					      <th>Kode Kursi</th>
+					      <th>Nama Studio</th>
 					    </tr>
 				  	</thead>
 				    <tbody>
 				    	@foreach($hasil as $id => $list)
 						    <tr @if ($id === 0) class="active" @endif>
-						    	<td>{{$list->id_kursi}}</td>
-							    <td>{{$list->kode_kursi}}</td>
+						    	<td>{{$list->id_studio}}</td>
+							    <td>{{$list->nama_studio}}</td>
 						    </tr>
 					    @endforeach
 					</tbody>
@@ -44,7 +44,7 @@
 			<div class="box-footer clearfix">
 				<!-- Tambah Film -->
 				<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#jadwalModal">
-				  Tambah Jadwal
+				  Tambah Studio
 				</button>
 	            <ul class="pagination pagination-sm no-margin pull-right">
 	            	{{ $hasil->links() }}    
@@ -53,20 +53,19 @@
 		</div>
 	</div>
 
-	{{-- Modal Tambah --}}
-	<div class="modal fade" id="jadwalModal" tabindex="-1" role="dialog" aria-labelledby="filmModal">
+		<div class="modal fade" id="jadwalModal" tabindex="-1" role="dialog" aria-labelledby="filmModal">
 	  <div class="modal-dialog" role="document">
 	    <div class="modal-content">
 	      <div class="modal-header">
 	        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-	        <h4 class="modal-title" id="filmModal">Kursi Baru</h4>
+	        <h4 class="modal-title" id="filmModal">Studio Baru</h4>
 	      </div>
-	      <form role="form" action="{{route('simpan_kursi')}}" method="post" enctype="multipart/form-data" >
+	      <form role="form" action="{{route('simpan_studio')}}" method="post" enctype="multipart/form-data" >
 	      	{{csrf_field()}}
-	      	<div class="modal-body">
+	      	<div class="modal-body modal-jadwal">
 				<div class="form-group">
-					<label for="kode_kursi">Kode Kursi</label>
-					<input type="text" class="form-control"  name="kode_kursi" id="kode_kursi">
+					<label for="nama_studio">Nama Studio</label>
+					<input type="text" class="form-control"  name="nama_studio" id="nama_studio">
 				</div>
 	      	</div>
 	      	<div class="modal-footer">
@@ -77,5 +76,4 @@
 	    </div>
 	  </div>
 	</div>
-
 @endsection

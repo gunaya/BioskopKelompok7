@@ -8,4 +8,5 @@ class Studio extends Model
 {
     protected $table = 'tb_studio';
     protected $primaryKey = 'id_studio';
+    protected $fillable = ['nama_studio'];
 }

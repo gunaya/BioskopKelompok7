@@ -155,6 +155,8 @@ desired effect
           </ul>
         </li>
         <li><a href="{{route('konfirmasi')}}"><i class="fa fa-link"></i> <span>Konfirmasi</span></a></li>
+        <li><a href="{{url('admin/member')}}"><i class="fa fa-link"></i> <span>Member</span></a></li>
+        <li><a href="{{url('admin/transaksi')}}"><i class="fa fa-link"></i> <span>Transaksi</span></a></li>
         <li class="treeview">
           <a href="#"><i class="fa fa-link"></i> <span>Kelola Penayangan</span>
             <span class="pull-right-container">
@@ -164,6 +166,7 @@ desired effect
           <ul class="treeview-menu">
             <li><a href="{{url('admin-film/penayangan/jadwal')}}">Jadwal Penayangan</a></li>
             <li><a href="{{url('admin-film/penayangan/edit_kursi')}}">Kelola Kursi</a></li>
+            <li><a href="{{url('admin-film/penayangan/studio')}}">Kelola Studio</a></li>
           </ul>
         </li>
       </ul>
