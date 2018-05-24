@@ -75,7 +75,8 @@ class AdminController extends Controller
 
     public function member()
     {
-      $hasil = User::paginate(7);
+      $hasil = User::where('admin',0)
+                  ->paginate(7);
       //dd($hasil->all());
       return view('admin-film/member',compact('hasil'));
     }

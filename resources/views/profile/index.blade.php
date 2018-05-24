@@ -61,7 +61,7 @@
 	<hr align="center" width="100%" >
 	<br>
 	<div class="box tabcontent" id="history">
-		<strong><em><h3><p class="text-center">Hostory Pembelian Tiket</p></h3></em></strong>
+		<strong><em><h4><p class="text-center">History Pembelian Tiket</p></h3></em></strong>
 		<div class="box-body">
 			<table class="table">
 					<thead>

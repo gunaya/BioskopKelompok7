@@ -64,7 +64,7 @@
         <!-- ./col -->
     </div>
     <div class="container">
-      <canvas id="canvas" height="280" width="500" style="width: 1000px; !important"></canvas>
+      <canvas id="canvas" height="280" width="500" style="width: 100px !important"></canvas>
     </div>
 
 <script>
@@ -89,8 +89,8 @@
             options: {
                 elements: {
                     rectangle: {
-                        borderWidth: 2,
-                        borderColor: 'rgb(0, 255, 0)',
+                        borderWidth: 1,
+                        borderColor: 'rgb(255, 80, 80)',
                         borderSkipped: 'bottom'
                     }
                 },
