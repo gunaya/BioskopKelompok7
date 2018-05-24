@@ -64,7 +64,7 @@
         <!-- ./col -->
     </div>
     <div class="container">
-      <canvas id="canvas" height="280" width="500" style="width: 100px !important"></canvas>
+      <canvas id="canvas" height="280" width="1000" style="width: 100px !important"></canvas>
     </div>
 
 <script>
