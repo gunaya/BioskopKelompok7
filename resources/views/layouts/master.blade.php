@@ -218,6 +218,8 @@ desired effect
 <script src="{{asset('admin-lte/dist/js/adminlte.min.js')}}"></script>
 <!-- Datepicker -->
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.21.0/moment.min.js"></script>
+{{-- ChartJS --}}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.js"></script>
 <!-- Edit Film -->
 <script src="{{asset('js/editFilm.js')}}"></script>
 <script src="{{asset('js/editKateGenre.js')}}"></script>

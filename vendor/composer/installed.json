@@ -1,42 +1,82 @@
 [
     {
-        "name": "composer/installers",
-        "version": "v1.5.0",
-        "version_normalized": "1.5.0.0",
+        "name": "balping/json-raw-encoder",
+        "version": "v1.0.0",
+        "version_normalized": "1.0.0.0",
         "source": {
             "type": "git",
-            "url": "https://github.com/composer/installers.git",
-            "reference": "049797d727261bf27f2690430d935067710049c2"
+            "url": "https://github.com/balping/json-raw-encoder.git",
+            "reference": "c404b7fc0e04ddf5d298e53105c5fc306f523195"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/composer/installers/zipball/049797d727261bf27f2690430d935067710049c2",
-            "reference": "049797d727261bf27f2690430d935067710049c2",
+            "url": "https://api.github.com/repos/balping/json-raw-encoder/zipball/c404b7fc0e04ddf5d298e53105c5fc306f523195",
+            "reference": "c404b7fc0e04ddf5d298e53105c5fc306f523195",
             "shasum": ""
         },
         "require": {
-            "composer-plugin-api": "^1.0"
-        },
-        "replace": {
-            "roundcube/plugin-installer": "*",
-            "shama/baton": "*"
+            "php": ">=7.0"
         },
         "require-dev": {
-            "composer/composer": "1.0.*@dev",
-            "phpunit/phpunit": "^4.8.36"
+            "phpunit/phpunit": "^7.1"
         },
-        "time": "2017-12-29T09:13:20+00:00",
-        "type": "composer-plugin",
+        "time": "2018-05-04T15:38:02+00:00",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Balping\\JsonRaw\\": "src/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "GPL-3.0-only"
+        ],
+        "authors": [
+            {
+                "name": "Balázs Dura-Kovács"
+            }
+        ],
+        "description": "Encode arrays to json with raw JS objects (eg. callbacks) in them",
+        "keywords": [
+            "callback",
+            "encode",
+            "json"
+        ]
+    },
+    {
+        "name": "consoletvs/charts",
+        "version": "6.2.0",
+        "version_normalized": "6.2.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/ConsoleTVs/Charts.git",
+            "reference": "635e9ee22e90cb75a97df7ed225b4fefe821daea"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/ConsoleTVs/Charts/zipball/635e9ee22e90cb75a97df7ed225b4fefe821daea",
+            "reference": "635e9ee22e90cb75a97df7ed225b4fefe821daea",
+            "shasum": ""
+        },
+        "require": {
+            "balping/json-raw-encoder": "^1.0",
+            "illuminate/support": "5.*",
+            "php": ">=7.0"
+        },
+        "time": "2018-05-04T17:40:36+00:00",
+        "type": "library",
         "extra": {
-            "class": "Composer\\Installers\\Plugin",
-            "branch-alias": {
-                "dev-master": "1.0-dev"
+            "laravel": {
+                "providers": [
+                    "ConsoleTVs\\Charts\\ChartsServiceProvider"
+                ]
             }
         },
         "installation-source": "dist",
         "autoload": {
             "psr-4": {
-                "Composer\\Installers\\": "src/Composer/Installers"
+                "ConsoleTVs\\Charts\\": "src/"
             }
         },
         "notification-url": "https://packagist.org/downloads/",
@@ -45,81 +85,11 @@
         ],
         "authors": [
             {
-                "name": "Kyle Robinson Young",
-                "email": "kyle@dontkry.com",
-                "homepage": "https://github.com/shama"
+                "name": "Èrik Campobadal Forés",
+                "email": "soc@erik.cat"
             }
         ],
-        "description": "A multi-framework Composer library installer",
-        "homepage": "https://composer.github.io/installers/",
-        "keywords": [
-            "Craft",
-            "Dolibarr",
-            "Eliasis",
-            "Hurad",
-            "ImageCMS",
-            "Kanboard",
-            "Lan Management System",
-            "MODX Evo",
-            "Mautic",
-            "Maya",
-            "OXID",
-            "Plentymarkets",
-            "Porto",
-            "RadPHP",
-            "SMF",
-            "Thelia",
-            "WolfCMS",
-            "agl",
-            "aimeos",
-            "annotatecms",
-            "attogram",
-            "bitrix",
-            "cakephp",
-            "chef",
-            "cockpit",
-            "codeigniter",
-            "concrete5",
-            "croogo",
-            "dokuwiki",
-            "drupal",
-            "eZ Platform",
-            "elgg",
-            "expressionengine",
-            "fuelphp",
-            "grav",
-            "installer",
-            "itop",
-            "joomla",
-            "kohana",
-            "laravel",
-            "lavalite",
-            "lithium",
-            "magento",
-            "majima",
-            "mako",
-            "mediawiki",
-            "modulework",
-            "modx",
-            "moodle",
-            "osclass",
-            "phpbb",
-            "piwik",
-            "ppi",
-            "puppet",
-            "pxcms",
-            "reindex",
-            "roundcube",
-            "shopware",
-            "silverstripe",
-            "sydes",
-            "symfony",
-            "typo3",
-            "wordpress",
-            "yawik",
-            "zend",
-            "zikula"
-        ]
+        "description": "The laravel charting package"
     },
     {
         "name": "dnoegel/php-xdg-base-dir",

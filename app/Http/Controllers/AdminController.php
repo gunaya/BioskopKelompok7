@@ -13,6 +13,8 @@ use App\User;
 use App\Film;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use ConsoleTVs\Charts\Facades\Charts;
+use DB;
 
 class AdminController extends Controller
 {
@@ -57,8 +59,18 @@ class AdminController extends Controller
       $booking = Transaksi::where('status','dibayar')
                         ->count();
 
-      //dd($booking); 
-      return view ('admin_home',compact('transaksi','member','film','booking'));
+      $hasil = Transaksi::select(DB::raw("COUNT(id_transaksi) as count"), DB::raw("CONCAT(monthname(waktu_transaksi),' ',year(waktu_transaksi)) as month"))
+                        ->orderBy("waktu_transaksi")
+                        ->groupBy(DB::raw("month(waktu_transaksi)"))
+                        ->groupBy(DB::raw("year(waktu_transaksi)"))
+                        ->get()
+                        ->toArray();
+      
+      $month = array_column($hasil, 'month');
+      $hasil = array_column($hasil, 'count');
+      return view ('admin_home',compact('transaksi','member','film','booking','month'))
+                  ->with('hasil',json_encode($hasil,JSON_NUMERIC_CHECK))
+                  ->with('month',json_encode($month,JSON_NUMERIC_CHECK));
     }
 
     public function member()

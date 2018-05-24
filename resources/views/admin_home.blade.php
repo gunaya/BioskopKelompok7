@@ -63,4 +63,54 @@
         </div>
         <!-- ./col -->
     </div>
+    <div class="container">
+      <canvas id="canvas" height="280" width="500" style="width: 1000px; !important"></canvas>
+    </div>
+
+<script>
+    var month = <?php echo $month;?>;
+    var data_viewer = <?php echo $hasil; ?>;
+
+    var barChartData = {
+        labels: month,
+        datasets: [{
+            label: 'Total Transaksi',
+            backgroundColor: "rgba(151,187,205,0.5)",
+            data: data_viewer
+        }]
+    };
+
+
+    window.onload = function() {
+        var ctx = document.getElementById("canvas").getContext("2d");
+        window.myBar = new Chart(ctx, {
+            type: 'bar',
+            data: barChartData,
+            options: {
+                elements: {
+                    rectangle: {
+                        borderWidth: 2,
+                        borderColor: 'rgb(0, 255, 0)',
+                        borderSkipped: 'bottom'
+                    }
+                },
+                responsive: true,
+                title: {
+                    display: true,
+                    text: 'Total Transaksi Tiap Bulan'
+                }, 
+                scales : {
+                    yAxes : [{
+                      ticks : {
+                        beginAtZero : true
+                      }
+                    }]
+                }
+            }
+        });
+
+
+    };
+</script>
+
 @endsection
